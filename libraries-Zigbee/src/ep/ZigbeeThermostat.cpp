@@ -1,5 +1,5 @@
 #include "ZigbeeThermostat.h"
-#if CONFIG_ZB_ENABLED
+//#if CONFIG_ZB_ENABLED
 
 static float zb_s16_to_temperature(int16_t value) {
   return 1.0 * value / 100;
