@@ -9,6 +9,10 @@
 #include "ZigbeeEP.h"
 #include "ha/esp_zigbee_ha_standard.h"
 
+#ifndef ZB_IEEE_ADDR_SIZE
+#define ZB_IEEE_ADDR_SIZE 8
+#endif
+
 // Custom Arduino-friendly enums for fan mode values
 enum ZigbeeFanMode {
     FAN_MODE_OFF = ESP_ZB_ZCL_FAN_CONTROL_FAN_MODE_OFF,
@@ -30,6 +34,9 @@ struct ZigbeeCarDeviceState {
     uint8_t motor_level;
     bool motor_on_off_state;
     ZigbeeFanMode gpio_mode;
+    uint16_t short_addr;
+    uint8_t endpoint;
+    uint8_t ieee_addr[8]; // Zigbee IEEE address chuẩn là 8 byte
 };
 
 class ZigbeeCarControl : public ZigbeeEP {
@@ -39,7 +46,7 @@ public:
      * @param endpoint Số endpoint Zigbee cho thiết bị này.
      */
     ZigbeeCarControl(uint8_t endpoint);
-
+    ~ZigbeeCarControl() {}
     /**
      * @brief Hàm callback tĩnh cho các yêu cầu liên kết ZDO.
      * Được sử dụng nội bộ bởi stack Zigbee khi cố gắng liên kết.
@@ -137,6 +144,7 @@ public:
      */
     const std::vector<ZigbeeCarDeviceState>& getBoundDevices() const { return _bound_fan_servers; }
 
+    
 private:
 
     std::vector<ZigbeeCarDeviceState> _bound_fan_servers;

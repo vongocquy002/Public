@@ -1,4 +1,5 @@
 #include "ZigbeeCarControl.h"
+#include "Zigbee.h"
 #if CONFIG_ZB_ENABLED
 
 #include "esp_zigbee_core.h"
@@ -26,27 +27,77 @@ ZigbeeCarControl::ZigbeeCarControl(uint8_t endpoint) : ZigbeeEP(endpoint) {
     // 2. Thêm Identify Cluster (SERVER_ROLE và CLIENT_ROLE) Để thiết bị này có thể được nhận dạng
     esp_zb_cluster_list_add_identify_cluster(_cluster_list, esp_zb_identify_cluster_create(NULL), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
     // 3. On/Off Cluster: Nhận báo cáo trạng thái BẬT/TẮT từ motor hoặc GPIO của CarDevice.
-    esp_zb_on_off_cluster_cfg_t on_off_cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
-    on_off_cfg.on_off = false; // Khởi tạo trạng thái ban đầu là TẮT (OFF)
-    esp_zb_cluster_list_add_on_off_cluster(_cluster_list, esp_zb_on_off_cluster_create(&on_off_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
-    // 4. Level Control Cluster: Nhận báo cáo mức độ (tốc độ) từ motor của CarDevice.
-    esp_zb_color_dimmable_switch_cfg_t level_control_cfg = ESP_ZB_DEFAULT_COLOR_DIMMABLE_SWITCH_CONFIG();
-    esp_zb_cluster_list_add_level_control_cluster(_cluster_list, esp_zb_color_dimmable_switch_clusters_create(&level_control_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+    // esp_zb_on_off_cluster_cfg_t on_off_cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
+    // on_off_cfg.on_off = false; // Khởi tạo trạng thái ban đầu là TẮT (OFF)
+    // esp_zb_cluster_list_add_on_off_cluster(_cluster_list, esp_zb_on_off_cluster_create(&on_off_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+    esp_zb_on_off_cluster_cfg_t on_off_cfg = {
+        .on_off = false // Trạng thái ban đầu là OFF (TẮT)
+    };
+    esp_zb_cluster_list_add_on_off_cluster(
+        _cluster_list,
+        esp_zb_on_off_cluster_create(&on_off_cfg),
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE
+    );
+
+    // 4. Fan Control Cluster: Đại diện cho tốc độ (speed) của motor
+    // esp_zb_color_dimmable_switch_cfg_t level_control_cfg = ESP_ZB_DEFAULT_COLOR_DIMMABLE_SWITCH_CONFIG();
+    // esp_zb_cluster_list_add_level_control_cluster(_cluster_list, esp_zb_color_dimmable_switch_clusters_create(&level_control_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+    esp_zb_attribute_list_t *level_cluster = esp_zb_cluster_list_get_cluster(
+    _cluster_list,
+    ESP_ZB_ZCL_CLUSTER_ID_LEVEL_CONTROL,
+    ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE
+    );
+
+    if (level_cluster) {
+        log_i("Đã tìm thấy Level Control Cluster ở client role.");
+        // Tùy bạn xử lý theo yêu cầu – thường ta dùng report handler để bắt giá trị trả về
+    }
+    // void app_report_handler(esp_zb_zcl_report_attr_message_t *message)
+    // {
+    //     if (message->cluster_id == ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL &&
+    //         message->attribute_id == ESP_ZB_ZCL_ATTR_FAN_CONTROL_FAN_MODE_ID) {
+
+    //         uint8_t speed = *(uint8_t *)message->attribute_data;
+    //         ESP_LOGI(TAG, "Tốc độ nhận được từ End Device (fan_mode): %d", speed);
+    //     }
+    // }
+    // // }//code callback cấu hình
     // 5. Fan Control Cluster: Nhận báo cáo chế độ hoạt động từ GPIO của CarDevice.
     esp_zb_fan_control_cluster_cfg_t fan_control_cfg = {
         .fan_mode = ESP_ZB_ZCL_FAN_CONTROL_FAN_MODE_OFF,
         .fan_mode_sequence = ESP_ZB_ZCL_FAN_CONTROL_FAN_MODE_SEQUENCE_LOW_MED_HIGH
     };
-    esp_zb_cluster_list_add_fan_control_cluster(_cluster_list, esp_zb_fan_control_cluster_create(&fan_control_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+    esp_zb_cluster_list_add_fan_control_cluster(
+        _cluster_list,
+        esp_zb_fan_control_cluster_create(&fan_control_cfg),
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE
+    );
     // 6. Identify Cluster: Để ZigbeeCarControl có thể gửi lệnh yêu cầu thiết bị khác nhận dạng.
-    esp_zb_cluster_list_add_identify_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_IDENTIFY), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    //esp_zb_cluster_list_add_identify_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_IDENTIFY), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    esp_zb_cluster_list_add_identify_cluster(
+        _cluster_list,
+        esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_IDENTIFY),
+        ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE
+    );
 
     // 7. On/Off Cluster: Gửi lệnh BẬT/TẮT motor hoặc GPIO. CLIENT_ROLE
-    esp_zb_cluster_list_add_on_off_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_ON_OFF), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    //esp_zb_cluster_list_add_on_off_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_ON_OFF), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    esp_zb_cluster_list_add_on_off_cluster(
+        _cluster_list,
+        esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_ON_OFF),
+        ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE
+    );
     // 8. Level Control Cluster: Gửi lệnh điều khiển tốc độ motor.
-    esp_zb_cluster_list_add_level_control_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_LEVEL_CONTROL), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    //esp_zb_cluster_list_add_level_control_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_LEVEL_CONTROL), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    esp_zb_color_dimmable_switch_cfg_t pwm_cfg = ESP_ZB_DEFAULT_COLOR_DIMMABLE_SWITCH_CONFIG();
+    _cluster_list = esp_zb_color_dimmable_switch_clusters_create(&pwm_cfg);
     // 9. Fan Control Cluster: Gửi lệnh điều khiển chế độ hoạt động của GPIO.
-    esp_zb_cluster_list_add_fan_control_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    //esp_zb_cluster_list_add_fan_control_cluster(_cluster_list, esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL), ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE);
+    esp_zb_cluster_list_add_fan_control_cluster(
+        _cluster_list,
+        esp_zb_zcl_attr_list_create(ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL),
+        ESP_ZB_ZCL_CLUSTER_CLIENT_ROLE
+    );
 
     _ep_config = {
         .endpoint = _endpoint,
@@ -58,18 +109,6 @@ ZigbeeCarControl::ZigbeeCarControl(uint8_t endpoint) : ZigbeeEP(endpoint) {
     log_i("ZigbeeCarControl đã được khởi tạo cho Endpoint %d (Device ID: 0x%04x) với khả năng nhận báo cáo trạng thái.", endpoint, _device_id);
 }
 
-/**
- * @brief Hàm hủy của ZigbeeCarControl.
- * Giải phóng các tài nguyên đã cấp phát.
- */
-ZigbeeCarControl::~ZigbeeCarControl() {
-    if (_cluster_list) {
-        esp_zb_cluster_list_free(_cluster_list); // Giải phóng danh sách Cluster
-        _cluster_list = NULL;
-    }
-    // std::vector _bound_fan_servers sẽ tự động được giải phóng
-    log_i("ZigbeeCarControl Endpoint %d đã bị hủy.", _endpoint);
-}
 
 /**
  * @brief Hàm wrapper tĩnh cho bindCb.
@@ -95,70 +134,44 @@ void ZigbeeCarControl::bindCbWrapper(esp_zb_zdp_status_t zdo_status, void *user_
  * @param user_ctx Con trỏ tới ZigbeeCarDeviceState của thiết bị vừa được liên kết.
  */
 void ZigbeeCarControl::bindCb(esp_zb_zdp_status_t zdo_status, void *user_ctx) {
+    // Kiểm tra user_ctx hợp lệ
+    if (!user_ctx) {
+        log_e("User context (device info) là null!");
+        return;
+    }
     // Ép kiểu ngữ cảnh người dùng về loại ZigbeeCarDeviceState
     ZigbeeCarDeviceState *device_info_to_bind = static_cast<ZigbeeCarDeviceState *>(user_ctx);
 
-    if (zdo_status == ESP_ZB_ZDP_STATUS_SUCCESS) {
-        log_i("Liên kết thành công với Fan Control Server: 0x%04x, EP %d",
-              device_info_to_bind->short_addr, device_info_to_bind->endpoint);
-
-        // Kiểm tra xem thiết bị này đã có trong danh sách các thiết bị đã liên kết chưa.
-        // Tránh thêm trùng lặp nếu có nhiều callback bind thành công cho cùng một thiết bị.
-        bool found = false;
-        for (const auto& device : _bound_fan_servers) {
-            if (device.short_addr == device_info_to_bind->short_addr &&
-                device.endpoint == device_info_to_bind->endpoint) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            // Nếu chưa có, thêm thiết bị mới vào vector
-            _bound_fan_servers.push_back(*device_info_to_bind);
-            log_i("Đã thêm thiết bị ZigbeeCarDevice 0x%04x (EP %d) vào danh sách điều khiển.",
-                  device_info_to_bind->short_addr, device_info_to_bind->endpoint);
-
-            // --- BẮT ĐẦU CẤU HÌNH BÁO CÁO CHO CÁC CLUSTER TRÊN THIẾT BỊ XE ---
-            // Sau khi liên kết thành công (thông qua Fan Control Cluster),
-            // chúng ta sẽ yêu cầu thiết bị xe báo cáo trạng thái của nó.
-            // Điều này áp dụng cho cả motor và các GPIO.
-
-            // Giả định:
-            // - Endpoint chính của xe (mà chúng ta đã bind Fan Control) sẽ có On/Off và Level Control cho motor.
-            // - Các GPIO điều khiển bằng Fan Control sẽ ở các Endpoint cụ thể khác.
-
-            // 1. Cấu hình báo cáo cho On/Off Cluster chính của xe (cho motor bật/tắt)
-            configureOnOffReporting(device_info_to_bind->short_addr, device_info_to_bind->endpoint);
-
-            // 2. Cấu hình báo cáo cho Level Control Cluster của xe (cho tốc độ motor)
-            configureLevelControlReporting(device_info_to_bind->short_addr, device_info_to_bind->endpoint);
-
-            // 3. Cấu hình báo cáo cho Fan Control Cluster của xe (cho chế độ GPIO)
-            // LƯU Ý QUAN TRỌNG:
-            // Bạn CẦN biết Endpoint ID cụ thể trên ZigbeeCarDevice nào chứa Fan Control Server
-            // để điều khiển các mode GPIO. Ví dụ, nếu motor ở EP1 và GPIO ở EP2, bạn sẽ cần biết EP2.
-            // Để đơn giản, tôi dùng chung device_info_to_bind->endpoint cho tất cả.
-            // Nếu bạn có một Endpoint riêng cho GPIO modes, hãy thay thế nó ở đây:
-            const uint8_t GPIO_MODES_CAR_DEVICE_EP = device_info_to_bind->endpoint; // Giả định cùng EP cho ví dụ này
-            // Hoặc: const uint8_t GPIO_MODES_CAR_DEVICE_EP = 5; // Nếu bạn biết EP cụ thể của GPIO modes
-            configureFanModeReporting(device_info_to_bind->short_addr, GPIO_MODES_CAR_DEVICE_EP);
-
-            // Bạn có thể thêm các cấu hình báo cáo cho các GPIO khác nếu chúng có các Endpoint riêng với On/Off Cluster.
-            // Ví dụ:
-            // const uint8_t LED_STATUS_CAR_DEVICE_EP = 10;
-            // configureOnOffReporting(device_info_to_bind->short_addr, LED_STATUS_CAR_DEVICE_EP);
-
-        } else {
-            log_w("Thiết bị ZigbeeCarDevice 0x%04x (EP %d) đã có trong danh sách. Bỏ qua thêm.",
-                  device_info_to_bind->short_addr, device_info_to_bind->endpoint);
-        }
-
-    } else {
-        log_e("Liên kết với ZigbeeCarDevice thất bại cho 0x%04x (EP %d), trạng thái ZDO: %d",
+    if (zdo_status != ESP_ZB_ZDP_STATUS_SUCCESS) {
+        log_e("Liên kết với thiết bị thất bại: 0x%04x (EP %d), mã lỗi: %d",
               device_info_to_bind->short_addr, device_info_to_bind->endpoint, zdo_status);
+        free(device_info_to_bind);  // Giải phóng bộ nhớ nếu thất bại
+        return;
     }
-    // Luôn giải phóng bộ nhớ đã cấp phát động sau khi sử dụng
+    log_i("Đã liên kết với Fan Control Server: 0x%04x, EP %d",
+          device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+
+    // Tránh trùng lặp
+    bool found = std::any_of(_bound_fan_servers.begin(), _bound_fan_servers.end(),
+                             [&](const ZigbeeCarDeviceState &dev) {
+                                 return dev.short_addr == device_info_to_bind->short_addr &&
+                                        dev.endpoint == device_info_to_bind->endpoint;
+                             });
+
+    if (!found) {
+        _bound_fan_servers.push_back(*device_info_to_bind);
+        log_i("Đã thêm thiết bị 0x%04x (EP %d) vào danh sách.", device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+
+        // Cấu hình báo cáo cho các cluster cần thiết
+        configureOnOffReporting(device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+        configureLevelControlReporting(device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+        configureFanModeReporting(device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+    } else {
+        log_w("Thiết bị 0x%04x (EP %d) đã có trong danh sách, bỏ qua.",
+              device_info_to_bind->short_addr, device_info_to_bind->endpoint);
+    }
+
+    // Giải phóng bộ nhớ động (nếu dùng malloc)
     free(device_info_to_bind);
 }
 
@@ -250,7 +263,7 @@ void ZigbeeCarControl::findCbWrapper(esp_zb_zdp_status_t zdo_status, uint16_t ad
  * @brief Bắt đầu quá trình tìm kiếm các Fan Control Server trong mạng.
  * Sau khi tìm thấy, quá trình liên kết sẽ được bắt đầu tự động thông qua các callback.
  */
-void ZigbeeCarControl::findFanControlServer() {
+void ZigbeeCarControl::findCarControlServer() {
     esp_zb_zdo_match_desc_req_param_t param = {0};
     // Tìm kiếm các thiết bị có Fan Control Cluster (làm Server)
     uint16_t cluster_list[] = {ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL};
@@ -279,55 +292,55 @@ bool ZigbeeCarControl::setCarMode(ZigbeeFanMode mode, uint16_t target_addr, uint
         return false;
     }
 
-    uint8_t fan_mode_val = (uint8_t)mode; // Giá trị Fan Mode cần gửi
+    uint8_t fan_mode_val = (uint8_t)mode;
     bool command_sent_at_least_one = false;
 
-    // Duyệt qua tất cả các thiết bị đã liên kết để gửi lệnh unicast
     for (const auto& server_params : _bound_fan_servers) {
-        // Kiểm tra xem đây có phải là thiết bị mục tiêu hay không (nếu target_addr/target_ep được chỉ định)
         if ((target_addr != 0xFFFF && server_params.short_addr != target_addr) ||
             (target_ep != 0xFF && server_params.endpoint != target_ep)) {
-            continue; // Bỏ qua nếu không khớp với mục tiêu
+            continue;
         }
 
         log_i("Đang gửi lệnh Fan Mode: %d tới 0x%04x/EP%d",
               mode, server_params.short_addr, server_params.endpoint);
 
-        esp_zb_zcl_write_attr_cmd_t write_req = {0};
-        write_req.address_mode = ESP_ZB_APS_ADDR_MODE_16_ENDP_PRESENT; // Gửi đến địa chỉ ngắn + endpoint
-        write_req.zcl_basic_cmd.dst_addr_u.addr_short = server_params.short_addr;
-        write_req.zcl_basic_cmd.dst_endpoint = server_params.endpoint; // Endpoint đích
-        write_req.zcl_basic_cmd.src_endpoint = _endpoint;              // Endpoint của bản thân Coordinator
-        write_req.clusterID = ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL;       // Cluster đích
+        esp_zb_zcl_write_attr_cmd_t write_req = {
+            .address_mode = ESP_ZB_APS_ADDR_MODE_16_ENDP_PRESENT,
+            .zcl_basic_cmd = {
+                .dst_addr_u = { .addr_short = server_params.short_addr },
+                .dst_endpoint = server_params.endpoint,
+                .src_endpoint = _endpoint
+            },
+            .clusterID = ESP_ZB_ZCL_CLUSTER_ID_FAN_CONTROL,
+            .attr_number = 1,
+            .attr_field = {
+                .attr_id = ESP_ZB_ZCL_ATTR_FAN_CONTROL_FAN_MODE_ID,
+                .attr_type = ESP_ZB_ZCL_ATTR_TYPE_8BIT_ENUM,
+                .attr_value = &fan_mode_val
+            }
+        };
 
-        esp_zb_zcl_write_attr_value_record_t attribute_records[1];
-        attribute_records[0].attr_id = ESP_ZB_ZCL_ATTR_FAN_CONTROL_FAN_MODE_ID; // Thuộc tính Fan Mode
-        attribute_records[0].attr_type = ESP_ZB_ZCL_ATTR_TYPE_8BIT_ENUM;        // Kiểu dữ liệu Enum 8-bit
-        attribute_records[0].attr_value = &fan_mode_val;                        // Con trỏ tới giá trị
-
-        write_req.attr_number = ZB_ARRAY_LENGHT(attribute_records); // Số lượng thuộc tính cần ghi (chỉ 1)
-        write_req.attribute_record_list = attribute_records;
-
-        esp_zb_lock_acquire(portMAX_DELAY); // Khóa Zigbee stack trước khi gửi lệnh
-        uint8_t zcl_status = esp_zb_zcl_write_attr_cmd_req(&write_req); // Gửi lệnh ghi thuộc tính
-        esp_zb_lock_release(); // Giải phóng khóa
+        esp_zb_lock_acquire(portMAX_DELAY);
+        uint8_t zcl_status = esp_zb_zcl_write_attr_cmd_req(&write_req);
+        esp_zb_lock_release();
 
         if (zcl_status != ESP_ZB_ZCL_STATUS_SUCCESS) {
-            log_e("Không gửi được lệnh Fan Mode cho 0x%04x/EP%d, trạng thái ZCL: 0x%x",
+            log_e("Không gửi được lệnh Fan Mode cho 0x%04x/EP%d, ZCL: 0x%x",
                   server_params.short_addr, server_params.endpoint, zcl_status);
         } else {
-            log_i("Đã gửi lệnh Fan Mode: %d đến 0x%04x/EP %d thành công.",
+            log_i("Đã gửi lệnh Fan Mode %d đến 0x%04x/EP %d thành công.",
                   mode, server_params.short_addr, server_params.endpoint);
-            command_sent_at_least_one = true; // Đánh dấu đã gửi thành công ít nhất một lệnh
+            command_sent_at_least_one = true;
         }
 
-        // Nếu chỉ điều khiển một thiết bị cụ thể, thoát vòng lặp sau khi gửi lệnh cho thiết bị đó.
-        if (target_addr != 0xFFFF && server_params.short_addr == target_addr &&
+        if (target_addr != 0xFFFF &&
+            server_params.short_addr == target_addr &&
             target_ep != 0xFF && server_params.endpoint == target_ep) {
             break;
         }
     }
-    return command_sent_at_least_one; // Trả về true nếu ít nhất một lệnh được gửi thành công
+
+    return command_sent_at_least_one;
 }
 
 /**
