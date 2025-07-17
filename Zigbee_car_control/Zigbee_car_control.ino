@@ -1,134 +1,186 @@
+// --- Bao gồm các thư viện cần thiết ---
+#include "esp_log.h"     // Để sử dụng ESP_LOGx cho logging
+#include "driver/gpio.h" // Để sử dụng GPIO
+#include "sdkconfig.h"   // Để kiểm tra CONFIG_ZB_ENABLED
+#include "Zigbee.h"      // Lớp Zigbee chính
+#include "ZigbeeCarControl.h" // Lớp điều khiển xe
 
+#if CONFIG_ZB_ENABLED // Đảm bảo chỉ biên dịch mã Zigbee khi đã bật cấu hình Zigbee
 
-// #ifndef ZIGBEE_MODE_ZCZR // Vẫn giữ kiểm tra này cho Coordinator
-// #error "Zigbee coordinator mode is not selected in Tools->Zigbee mode"
-// #endif
+// --- Định nghĩa các hằng số ---
+#define ZB_OUR_ENDPOINT         1        // Endpoint của thiết bị Coordinator
+#define BOOT_BUTTON_PIN        BOOT_PIN  // Sử dụng nút BOOT
+#define DEBOUNCE_DELAY         50       // Thời gian debounce (ms)
+#define RESET_HOLD_TIME        3000     // Thời gian giữ nút để reset (ms)
+#define TAG_MAIN               "MAIN_APP" // Tag cho logging
 
-// #include "ZigbeeCarControl.h"
-// #include "Zigbee.h" // Thư viện Zigbee Core
+// --- Biến toàn cục ---
+ZigbeeCarControl *carControl = nullptr; // Instance của ZigbeeCarControl
 
-// /* Cấu hình Zigbee Car Control (Coordinator) */
-// #define ZIGBEE_CAR_CONTROL_ENDPOINT 1
-
-// #ifdef RGB_BUILTIN // Sử dụng LED RGB tích hợp để mô phỏng trạng thái
-// uint8_t led = RGB_BUILTIN;
-// #else
-// uint8_t led = 2;
-// #endif
-
-// uint8_t button = BOOT_PIN; // Nút nhấn để thay đổi chế độ quạt và factory reset
-
-// // Khởi tạo instance của ZigbeeCarControl
-// ZigbeeCarControl zbCarControl = ZigbeeCarControl(ZIGBEE_CAR_CONTROL_ENDPOINT);
-
-// // Trạng thái chế độ quạt hiện tại cho điều khiển (sẽ chuyển đổi qua các chế độ)
-// // Sử dụng các chế độ car từ ZigbeeCarMode đã được định nghĩa trong ZigbeeCarCommon.h
-// ZigbeeCarMode currentControlCarMode = CAR_MODE_OFF;
-// // Mảng các chế độ quạt để chuyển đổi qua lại
-// const ZigbeeCarMode carModes[] = {CAR_MODE_OFF, CAR_MODE_LOW, CAR_MODE_MEDIUM, CAR_MODE_HIGH, CAR_MODE_ON, CAR_MODE_AUTO, CAR_MODE_SMART};
-// const uint8_t numCarModes = sizeof(carModes) / sizeof(carModes[0]); // Số lượng chế độ
-// uint8_t carModeIndex = 0; // Chỉ số của chế độ hiện tại
-
-// /********************* Các hàm Arduino **************************/
-// void setup() {
-//     Serial.begin(115200);
-
-//     // Khởi tạo LED (sử dụng để hiển thị trạng thái của Coordinator, không phải quạt)
-//     rgbLedWrite(led, 0, 0, 0);
-
-//     // Khởi tạo nút nhấn cho factory reset và điều khiển quạt
-//     pinMode(button, INPUT_PULLUP);
-
-//     // Tùy chọn: đặt tên nhà sản xuất và model cho thiết bị
-//     zbCarControl.setManufacturerAndModel("Espressif", "ZBCarControl_Coord");
-
-//     // Thêm endpoint vào Zigbee Core
-//     Serial.println("Adding ZigbeeCarControl endpoint to Zigbee Core");
-//     Zigbee.addEndpoint(&zbCarControl);
-
-//     Serial.println("Đang khởi động Zigbee...");
-//     // Khi tất cả các EP được đăng ký, bắt đầu Zigbee ở chế độ COORDINATOR
-//     if (!Zigbee.begin(ZIGBEE_COORDINATOR)) {
-//         Serial.println("Zigbee khởi động thất bại!");
-//         Serial.println("Đang khởi động lại...");
-//         ESP.restart();
-//     } else {
-//         Serial.println("Zigbee đã khởi động thành công!");
-//     }
-
-//     // Mở mạng cho phép thiết bị khác tham gia (trong 3 phút = 180 giây)
-//     Serial.println("Mở mạng Zigbee trong 3 phút...");
-//     Zigbee.setRebootOpenNetwork(180);
-
-//     Serial.println("Đang chờ Car Remote (Server) khả dụng và liên kết...");
-//     // Bắt đầu quá trình khám phá và liên kết với Car Control Server (ZigbeeCarRemote)
-//     zbCarControl.findCarControlServer();
-
-//     // Chờ cho đến khi điều khiển được liên kết với car server
-//     // Đặt thời gian chờ để tránh bị treo vô hạn
-//     unsigned long start_time = millis();
-//     while (!zbCarControl.isBound()) {
-//         Serial.printf("."); // In dấu chấm để hiển thị quá trình chờ
-//         delay(500); // Đợi nửa giây
-//         if (millis() - start_time > 300000) { // Hết thời gian chờ sau 5 phút (300000 ms)
-//             Serial.println("\nLiên kết hết thời gian chờ. Đảm bảo thiết bị quạt (Remote) đã bật nguồn.");
-//             // Có thể thử lại việc tìm kiếm/liên kết hoặc factory reset ở đây nếu muốn
-//             ESP.restart(); // Khởi động lại để thử lại
-//         }
-//     }
-//     Serial.println("\nĐã liên kết thành công với ZigbeeCarRemote!");
-// }
-
-// void loop() {
-//     // Xử lý nút nhấn để thay đổi chế độ quạt và gửi lệnh
-//     if (digitalRead(button) == LOW) { // Nếu nút nhấn được nhấn (nối GND)
-//         // Xử lý debounce cho nút nhấn
-//         delay(100); // Chờ 100ms để ổn định
-//         int startTime = millis();
-//         while (digitalRead(button) == LOW) {
-//             delay(50); // Chờ thêm khi nút vẫn được giữ
-//             if ((millis() - startTime) > 3000) { // Giữ nút > 3 giây để factory reset
-//                 Serial.println("Resetting Zigbee to factory and rebooting in 1s.");
-//                 delay(1000);
-//                 Zigbee.factoryReset();
-//             }
-//         }
-
-//         // Nếu nút chỉ được nhấn nhanh (không giữ để reset)
-//         if (zbCarControl.isBound()) {
-//             // Chuyển đổi qua chế độ quạt tiếp theo
-//             carModeIndex = (carModeIndex + 1) % numCarModes;
-//             currentControlCarMode = carModes[carModeIndex];
-
-//             Serial.printf("Nút nhấn. Đang gửi lệnh Car Mode: %d (%s)\n", (uint8_t)currentControlCarMode,
-//                           (currentControlCarMode == CAR_MODE_OFF) ? "OFF" :
-//                           (currentControlCarMode == CAR_MODE_LOW) ? "LOW" :
-//                           (currentControlCarMode == CAR_MODE_MEDIUM) ? "MEDIUM" :
-//                           (currentControlCarMode == CAR_MODE_HIGH) ? "HIGH" :
-//                           (currentControlCarMode == CAR_MODE_ON) ? "ON" :
-//                           (currentControlCarMode == CAR_MODE_AUTO) ? "AUTO" : "SMART");
-
-//             // Gửi lệnh thay đổi chế độ quạt qua Zigbee
-//             if (zbCarControl.setCarMode(currentControlCarMode)) {
-//                 Serial.println("Lệnh chế độ quạt đã được gửi thành công.");
-//             } else {
-//                 Serial.println("Không gửi được lệnh chế độ quạt.");
-//             }
-//         } else {
-//             Serial.println("Chưa liên kết với Car Remote. Không thể gửi lệnh.");
-//             Serial.println("Đang thử tìm kiếm lại Car Remote...");
-//             zbCarControl.findCarControlServer(); // Thử tìm kiếm lại
-//         }
-//     }
-//     delay(100); // Độ trễ nhỏ để tránh vòng lặp quá nhanh, giảm tải CPU
-// }
-
+// --- Hàm setup() của Arduino ---
 void setup() {
-  // put your setup code here, to run once:
+    // Khởi tạo Serial
+    Serial.begin(115200);
+    esp_log_level_set("*", ESP_LOG_INFO); // Mức log mặc định
+    esp_log_level_set(TAG_MAIN, ESP_LOG_INFO);
 
+    Serial.println("Khoi tao ung dung dieu khien xe Zigbee...");
+
+    // Thiết lập nút BOOT
+    pinMode(BOOT_BUTTON_PIN, INPUT_PULLUP);
+
+    // Khởi tạo ZigbeeCarControl
+    carControl = new ZigbeeCarControl(ZB_OUR_ENDPOINT);
+    if (!carControl) {
+        Serial.println("Khong the khoi tao ZigbeeCarControl!");
+        ESP.restart();
+    }
+
+    // Thêm endpoint vào Zigbee Core
+    Serial.println("Dang them ZigbeeCarControl endpoint vao Zigbee Core...");
+    Zigbee.addEndpoint(carControl);
+
+    // Bắt đầu Zigbee trong chế độ COORDINATOR
+    if (!Zigbee.begin(ZIGBEE_COORDINATOR)) {
+        Serial.println("Zigbee khong khoi dong duoc!");
+        Serial.println("Rebooting...");
+        ESP.restart();
+    }
+
+    // Chờ kết nối mạng Zigbee
+    Serial.println("Dang ket noi mang Zigbee...");
+    while (!Zigbee.connected()) {
+        Serial.print(".");
+        delay(100);
+    }
+    Serial.println("\nMang Zigbee da ket noi!");
+
+    // Mở mạng cho phép thiết bị tham gia
+    Zigbee.openNetwork(180); // Mở mạng trong 180 giây
+    Serial.println("Mang Zigbee da mo cho phep thiet bi tham gia trong 180 giay.");
+
+    // Bắt đầu tìm kiếm các ZigbeeCarDevice
+    carControl->findCarControlServer();
+    Serial.println("Ung dung da san sang. Nhap lenh qua Serial hoac nhan nut BOOT...");
+    Serial.println("Lenh Serial: 'on', 'off', 'level <0-254>', 'mode <0-6>'");
+    Serial.println("Nut BOOT: Nhan ngan de gui lenh, giu 3s de factory reset.");
 }
 
+// --- Hàm loop() của Arduino ---
 void loop() {
-  // put your main code here, to run repeatedly:
+    static unsigned long last_button_press_time = 0;
+    static unsigned long button_press_start_time = 0;
+    static bool button_held = false;
 
+    // Kiểm tra kết nối Zigbee
+    if (!Zigbee.connected()) {
+        Serial.println("Mang Zigbee mat ket noi. Thu ket noi lai...");
+        Zigbee.begin(ZIGBEE_COORDINATOR);
+        while (!Zigbee.connected()) {
+            Serial.print(".");
+            delay(100);
+        }
+        Serial.println("\nDa ket noi lai mang Zigbee!");
+        carControl->findCarControlServer(); // Tìm lại thiết bị
+    }
+
+    // Xử lý nút BOOT
+    if (digitalRead(BOOT_BUTTON_PIN) == LOW) {
+        unsigned long current_time = millis();
+
+        if (!button_held) {
+            // Bắt đầu nhấn nút
+            button_held = true;
+            button_press_start_time = current_time;
+        }
+
+        // Kiểm tra nhấn dài để factory reset
+        if (current_time - button_press_start_time >= RESET_HOLD_TIME) {
+            Serial.println("Resetting Zigbee to factory and rebooting in 1s...");
+            delay(1000);
+            Zigbee.factoryReset();
+            ESP.restart();
+        }
+    } else if (button_held) {
+        // Thả nút
+        button_held = false;
+        unsigned long press_duration = millis() - button_press_start_time;
+
+        // Nhấn ngắn để gửi lệnh
+        if (press_duration < RESET_HOLD_TIME && 
+            millis() - last_button_press_time > DEBOUNCE_DELAY) {
+            last_button_press_time = millis();
+            if (Zigbee.connected() && Zigbee.getRole() == ZIGBEE_COORDINATOR) {
+                Serial.println("Nut BOOT nhan ngan! Gui cac lenh mac dinh...");
+
+                // Gửi các lệnh mặc định
+                carControl->sendOnOffCommand(true, 0xFFFF, 0xFF); // Broadcast ON
+                carControl->sendLevelControlCommand(150, 5, 0xFFFF, 0xFF); // Level 150, 0.5s
+                carControl->setCarMode(FAN_MODE_LOW, 0xFFFF, 0xFF); // Fan Mode LOW
+
+                // Cấu hình báo cáo cho tất cả thiết bị đã liên kết
+                if (carControl->getBoundDeviceCount() > 0) {
+                    for (const auto& device : carControl->getBoundDevices()) {
+                        log_i("Cau hinh bao cao cho thiet bi 0x%04x/EP%d", 
+                              device.short_addr, device.endpoint);
+                        carControl->configureOnOffReporting(device.short_addr, device.endpoint);
+                        carControl->configureLevelControlReporting(device.short_addr, device.endpoint);
+                        carControl->configureFanModeReporting(device.short_addr, device.endpoint);
+                    }
+                } else {
+                    Serial.println("Chua co thiet bi nao duoc lien ket de cau hinh bao cao.");
+                }
+                Serial.println("Da gui xong cac lenh mac dinh.");
+            } else {
+                Serial.println("Mang Zigbee chua san sang de gui lenh.");
+            }
+        }
+    }
+
+    // Xử lý lệnh qua Serial
+    if (Serial.available()) {
+        String input = Serial.readStringUntil('\n');
+        input.trim();
+        if (Zigbee.connected() && Zigbee.getRole() == ZIGBEE_COORDINATOR) {
+            if (input.equalsIgnoreCase("on")) {
+                carControl->sendOnOffCommand(true, 0xFFFF, 0xFF);
+                Serial.println("Da gui lenh ON.");
+            } else if (input.equalsIgnoreCase("off")) {
+                carControl->sendOnOffCommand(false, 0xFFFF, 0xFF);
+                Serial.println("Da gui lenh OFF.");
+            } else if (input.startsWith("level ")) {
+                int level = input.substring(6).toInt();
+                if (level >= 0 && level <= 254) {
+                    carControl->sendLevelControlCommand(level, 5, 0xFFFF, 0xFF);
+                    Serial.printf("Da gui lenh Level Control: %d\n", level);
+                } else {
+                    Serial.println("Level phai tu 0 den 254!");
+                }
+            } else if (input.startsWith("mode ")) {
+                int mode = input.substring(5).toInt();
+                if (mode >= FAN_MODE_OFF && mode <= FAN_MODE_SMART) {
+                    carControl->setCarMode((ZigbeeFanMode)mode, 0xFFFF, 0xFF);
+                    Serial.printf("Da gui lenh Fan Mode: %d\n", mode);
+                } else {
+                    Serial.println("Mode phai tu 0 (OFF) den 6 (SMART)!");
+                }
+            } else {
+                Serial.println("Lenh khong hop le! Dung: 'on', 'off', 'level <0-254>', 'mode <0-6>'");
+            }
+        } else {
+            Serial.println("Mang Zigbee chua san sang de gui lenh.");
+        }
+    }
+
+    delay(10); // Delay nhỏ để tránh CPU chạy 100%
 }
+
+#else // CONFIG_ZB_ENABLED is not defined
+void setup() {
+    Serial.begin(115200);
+    Serial.println("Zigbee is NOT enabled in sdkconfig. Please enable it.");
+}
+void loop() {
+    // Do nothing
+}
+#endif // CONFIG_ZB_ENABLED

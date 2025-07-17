@@ -1,5 +1,5 @@
 #include "ZigbeeFanControl.h"
-#if CONFIG_ZB_ENABLED
+//#if CONFIG_ZB_ENABLED
 
 ZigbeeFanControl::ZigbeeFanControl(uint8_t endpoint) : ZigbeeEP(endpoint) {
   _device_id = ESP_ZB_HA_THERMOSTAT_DEVICE_ID;  //There is no FAN_CONTROL_DEVICE_ID in the Zigbee spec
