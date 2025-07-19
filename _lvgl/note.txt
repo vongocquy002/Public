@@ -1,5 +1,0 @@
-esp32: 3.2.0
-lvgl: 8.3.6
-esp32 display panel: 1.0.2
-esp32 io expander: 1.1.1
-utils: 0.2.3
