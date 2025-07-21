@@ -234,5 +234,5 @@ void setup() {
 }
 
 void loop() {
-  // Loop trống, FreeRTOS quản lý tất cả
+  
 }
