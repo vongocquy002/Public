@@ -6,7 +6,6 @@
 #include "lvgl_v8_port.h"
 #include "ui.h"
 
-#include <WiFi.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <freertos/queue.h>
@@ -47,14 +46,61 @@ const CarConfig carConfigs[] = {
 
 // Command Types
 enum CommandType {
-  ON_OFF_ALL   = 0x01,
-  SPEED_ALL    = 0x02,
-  ON_OFF_CAR   = 0x03,
-  SPEED_CAR    = 0x04,
-  MODE         = 0x05,
-  GPIO_CONTROL = 0x06,
+  ON_OFF_ALL    = 0x01,
+  SPEED_ALL     = 0x02,
+  ON_OFF_CAR    = 0x03,
+  SPEED_CAR     = 0x04,
+  MODE          = 0x05,
+  GPIO_CONTROL  = 0x06,
   STATUS_REPORT = 0x07
 };
+
+// Trạng thái xe
+struct CarStatus {
+  bool isOn;
+  uint8_t speed;
+  uint8_t mode;
+  uint8_t gpio[6];
+};
+
+// Lưu trạng thái cho từng xe
+CarStatus carStatuses[5] = {
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}}
+};
+
+// Lưu trạng thái xe vào NVS
+void saveCarStatus(CarID carId) {
+  preferences.begin("car_status", false);
+  String key = "car" + String(carId);
+  preferences.putBool(key + "_on", carStatuses[carId].isOn);
+  preferences.putUChar(key + "_speed", carStatuses[carId].speed);
+  preferences.putUChar(key + "_mode", carStatuses[carId].mode);
+  for (int i = 0; i < 6; i++) {
+    preferences.putUChar(key + "_gpio" + String(i), carStatuses[carId].gpio[i]);
+  }
+  preferences.end();
+  Serial.println("Car " + String(carId) + " status saved to NVS");
+}
+
+// Khôi phục trạng thái xe từ NVS
+void restoreCarStatus() {
+  preferences.begin("car_status", true);
+  for (int i = 0; i < 5; i++) {
+    String key = "car" + String(i);
+    carStatuses[i].isOn = preferences.getBool(key + "_on", false);
+    carStatuses[i].speed = preferences.getUChar(key + "_speed", 0);
+    carStatuses[i].mode = preferences.getUChar(key + "_mode", 1);
+    for (int j = 0; j < 6; j++) {
+      carStatuses[i].gpio[j] = preferences.getUChar(key + "_gpio" + String(j), 0);
+    }
+  }
+  preferences.end();
+  Serial.println("Car statuses restored from NVS");
+}
 
 // Tạo và gửi frame
 void sendCommand(WiFiClient &client, CommandType cmd, CarID carId, uint8_t* payload, uint8_t payloadLen) {
@@ -71,6 +117,17 @@ void sendCommand(WiFiClient &client, CommandType cmd, CarID carId, uint8_t* payl
 QueueHandle_t dataQueue;
 SemaphoreHandle_t clientMutex;
 Preferences preferences; //lưu giá trị vào flash nvs
+
+// Gửi lệnh tới tất cả client
+void sendCommandToAll(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
+  xSemaphoreTake(clientMutex, portMAX_DELAY);
+  for (int i = 0; i < maxClients; i++) {
+    if (clients[i].connected()) {
+      sendCommand(clients[i], cmd, (CarID)0xFF, payload, payloadLen);
+    }
+  }
+  xSemaphoreGive(clientMutex);
+}
 
 // Tìm CarID dựa trên IP
 CarID getCarIdByIP(IPAddress ip) {
