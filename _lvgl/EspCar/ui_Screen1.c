@@ -194,6 +194,15 @@ void ui_event_OnOffAllCarbtn3(lv_event_t * e)
     }
 }
 
+void ui_event_Dropdown2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        Car1Speed(e);
+    }
+}
+
 void ui_event_OnOffAllCarbtn2(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -253,7 +262,7 @@ void ui_event_MotorMode2(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Mode(e);
+        Car2Mode(e);
     }
 }
 
@@ -262,7 +271,16 @@ void ui_event_OnOffAllCarbtn15(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1OnOff(e);
+        Car2OnOff(e);
+    }
+}
+
+void ui_event_Dropdown4(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        Car2Speed(e);
     }
 }
 
@@ -271,7 +289,7 @@ void ui_event_OnOffAllCarbtn8(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io1Func(e);
+        Car2Io1Func(e);
     }
 }
 
@@ -280,7 +298,7 @@ void ui_event_OnOffAllCarbtn9(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io2Func(e);
+        Car2Io2Func(e);
     }
 }
 
@@ -289,7 +307,7 @@ void ui_event_OnOffAllCarbtn10(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io3Func(e);
+        Car2Io3Func(e);
     }
 }
 
@@ -298,7 +316,7 @@ void ui_event_OnOffAllCarbtn11(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io4Func(e);
+        Car2Io4Func(e);
     }
 }
 
@@ -307,7 +325,7 @@ void ui_event_OnOffAllCarbtn12(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io6Func(e);
+        Car2Io6Func(e);
     }
 }
 
@@ -316,7 +334,7 @@ void ui_event_OnOffAllCarbtn13(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io5Func(e);
+        Car2Io5Func(e);
     }
 }
 
@@ -325,7 +343,7 @@ void ui_event_MotorMode3(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Mode(e);
+        Car3Mode(e);
     }
 }
 
@@ -334,7 +352,16 @@ void ui_event_OnOffAllCarbtn16(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1OnOff(e);
+        Car3OnOff(e);
+    }
+}
+
+void ui_event_Dropdown5(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        Car3Speed(e);
     }
 }
 
@@ -343,7 +370,7 @@ void ui_event_OnOffAllCarbtn17(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io1Func(e);
+        Car3Io1Func(e);
     }
 }
 
@@ -352,7 +379,7 @@ void ui_event_OnOffAllCarbtn18(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io2Func(e);
+        Car3Io2Func(e);
     }
 }
 
@@ -361,7 +388,7 @@ void ui_event_OnOffAllCarbtn19(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io3Func(e);
+        Car3Io3Func(e);
     }
 }
 
@@ -370,7 +397,7 @@ void ui_event_OnOffAllCarbtn20(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io4Func(e);
+        Car3Io4Func(e);
     }
 }
 
@@ -379,7 +406,7 @@ void ui_event_OnOffAllCarbtn21(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io6Func(e);
+        Car3Io6Func(e);
     }
 }
 
@@ -388,7 +415,7 @@ void ui_event_OnOffAllCarbtn22(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io5Func(e);
+        Car3Io5Func(e);
     }
 }
 
@@ -397,7 +424,7 @@ void ui_event_MotorMode4(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Mode(e);
+        Car4Mode(e);
     }
 }
 
@@ -406,7 +433,16 @@ void ui_event_OnOffAllCarbtn23(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1OnOff(e);
+        Car4OnOff(e);
+    }
+}
+
+void ui_event_Dropdown6(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        Car4Speed(e);
     }
 }
 
@@ -415,7 +451,7 @@ void ui_event_OnOffAllCarbtn24(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io1Func(e);
+        Car4Io1Func(e);
     }
 }
 
@@ -424,7 +460,7 @@ void ui_event_OnOffAllCarbtn25(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io2Func(e);
+        Car4Io2Func(e);
     }
 }
 
@@ -433,7 +469,7 @@ void ui_event_OnOffAllCarbtn26(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io3Func(e);
+        Car4Io3Func(e);
     }
 }
 
@@ -442,7 +478,7 @@ void ui_event_OnOffAllCarbtn27(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io4Func(e);
+        Car4Io4Func(e);
     }
 }
 
@@ -451,7 +487,7 @@ void ui_event_OnOffAllCarbtn28(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io6Func(e);
+        Car4Io6Func(e);
     }
 }
 
@@ -460,7 +496,7 @@ void ui_event_OnOffAllCarbtn29(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io5Func(e);
+        Car4Io5Func(e);
     }
 }
 
@@ -469,7 +505,7 @@ void ui_event_MotorMode5(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Mode(e);
+        Car5Mode(e);
     }
 }
 
@@ -478,7 +514,16 @@ void ui_event_OnOffAllCarbtn30(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1OnOff(e);
+        Car5OnOff(e);
+    }
+}
+
+void ui_event_Dropdown7(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        Car5Speed(e);
     }
 }
 
@@ -487,7 +532,7 @@ void ui_event_OnOffAllCarbtn31(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io1Func(e);
+        Car5Io1Func(e);
     }
 }
 
@@ -496,7 +541,7 @@ void ui_event_OnOffAllCarbtn32(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io2Func(e);
+        Car5Io2Func(e);
     }
 }
 
@@ -505,7 +550,7 @@ void ui_event_OnOffAllCarbtn33(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io3Func(e);
+        Car5Io3Func(e);
     }
 }
 
@@ -514,7 +559,7 @@ void ui_event_OnOffAllCarbtn34(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io4Func(e);
+        Car5Io4Func(e);
     }
 }
 
@@ -523,7 +568,7 @@ void ui_event_OnOffAllCarbtn35(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io6Func(e);
+        Car5Io6Func(e);
     }
 }
 
@@ -532,7 +577,7 @@ void ui_event_OnOffAllCarbtn36(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        Car1Io5Func(e);
+        Car5Io5Func(e);
     }
 }
 
@@ -542,6 +587,15 @@ void ui_event_OnOffAllCarbtn(lv_event_t * e)
 
     if(event_code == LV_EVENT_VALUE_CHANGED) {
         OnOffAllCar(e);
+    }
+}
+
+void ui_event_Dropdown1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        SpeedAll(e);
     }
 }
 
@@ -1923,6 +1977,7 @@ void ui_Screen1_screen_init(void)
 
     lv_obj_add_event_cb(ui_MotorMode, ui_event_MotorMode, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn3, ui_event_OnOffAllCarbtn3, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown2, ui_event_Dropdown2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn2, ui_event_OnOffAllCarbtn2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn4, ui_event_OnOffAllCarbtn4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn1, ui_event_OnOffAllCarbtn1, LV_EVENT_ALL, NULL);
@@ -1931,6 +1986,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_add_event_cb(ui_OnOffAllCarbtn7, ui_event_OnOffAllCarbtn7, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MotorMode2, ui_event_MotorMode2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn15, ui_event_OnOffAllCarbtn15, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown4, ui_event_Dropdown4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn8, ui_event_OnOffAllCarbtn8, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn9, ui_event_OnOffAllCarbtn9, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn10, ui_event_OnOffAllCarbtn10, LV_EVENT_ALL, NULL);
@@ -1939,6 +1995,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_add_event_cb(ui_OnOffAllCarbtn13, ui_event_OnOffAllCarbtn13, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MotorMode3, ui_event_MotorMode3, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn16, ui_event_OnOffAllCarbtn16, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown5, ui_event_Dropdown5, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn17, ui_event_OnOffAllCarbtn17, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn18, ui_event_OnOffAllCarbtn18, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn19, ui_event_OnOffAllCarbtn19, LV_EVENT_ALL, NULL);
@@ -1947,6 +2004,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_add_event_cb(ui_OnOffAllCarbtn22, ui_event_OnOffAllCarbtn22, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MotorMode4, ui_event_MotorMode4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn23, ui_event_OnOffAllCarbtn23, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown6, ui_event_Dropdown6, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn24, ui_event_OnOffAllCarbtn24, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn25, ui_event_OnOffAllCarbtn25, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn26, ui_event_OnOffAllCarbtn26, LV_EVENT_ALL, NULL);
@@ -1955,6 +2013,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_add_event_cb(ui_OnOffAllCarbtn29, ui_event_OnOffAllCarbtn29, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MotorMode5, ui_event_MotorMode5, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn30, ui_event_OnOffAllCarbtn30, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown7, ui_event_Dropdown7, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn31, ui_event_OnOffAllCarbtn31, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn32, ui_event_OnOffAllCarbtn32, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn33, ui_event_OnOffAllCarbtn33, LV_EVENT_ALL, NULL);
@@ -1962,6 +2021,7 @@ void ui_Screen1_screen_init(void)
     lv_obj_add_event_cb(ui_OnOffAllCarbtn35, ui_event_OnOffAllCarbtn35, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn36, ui_event_OnOffAllCarbtn36, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn, ui_event_OnOffAllCarbtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Dropdown1, ui_event_Dropdown1, LV_EVENT_ALL, NULL);
 
 }
 

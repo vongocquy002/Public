@@ -1,20 +1,18 @@
 // Sự kiện nút nhấn cho ON/OFF tất cả xe
 void OnOffAllCar(lv_event_t * e) {
-  Serial.println("OnOffAllCar function called!");
   lv_obj_t* sw = lv_event_get_target(e);
-  if (!sw) return;
-  bool isOn = lv_obj_has_state(sw, LV_STATE_CHECKED);
-  uint8_t payload[1] = {isOn ? 1 : 0};
-
-  if (xSemaphoreTake(clientMutex, portMAX_DELAY) == pdTRUE) {
-    sendCommandToAll(ON_OFF_ALL, payload, 1);
-    char msg[64];
-    snprintf(msg, sizeof(msg), "Sent ON_OFF_ALL: %s to all cars", isOn ? "ON" : "OFF");
-    xQueueSend(dataQueue, msg, portMAX_DELAY);
-    xSemaphoreGive(clientMutex);
-  } else {
-    Serial.println("Cannot take semaphore for ON_OFF_ALL!");
+  if (!sw) {
+    Serial.println("Invalid switch in OnOffAllCar!");
+    return;
   }
+  bool isOn = lv_obj_has_state(sw, LV_STATE_CHECKED);
+  uint8_t payload[1] = {(uint8_t)(isOn ? 1 : 0)};
+
+  Serial.printf("OnOffAllCar: %s\n", isOn ? "ON" : "OFF");
+  sendCommandToAll(ON_OFF_ALL, payload, 1);
+  char msg[64];
+  snprintf(msg, sizeof(msg), "Sent ON_OFF_ALL: %s to all cars", isOn ? "ON" : "OFF");
+  xQueueSend(dataQueue, msg, portMAX_DELAY);
 
   for (int i = 0; i < 5; i++) {
     carStatuses[i].isOn = isOn;
@@ -57,29 +55,23 @@ void SpeedAll(lv_event_t * e) {
         return;
     }
 
-    if (xSemaphoreTake(clientMutex, portMAX_DELAY) == pdTRUE) {
-      uint8_t payload[1] = {speed};
-      sendCommandToAll(SPEED_ALL, payload, 1);
-      char msg[64];
-      snprintf(msg, sizeof(msg), "Sent SPEED_ALL: %d%% to all cars", speed);
-      xQueueSend(dataQueue, msg, portMAX_DELAY);
-      xSemaphoreGive(clientMutex);
-    } else {
-      Serial.println("Cannot take semaphore for SPEED_ALL!");
-    }
+    uint8_t payload[1] = {speed}; // Define payload here
+    sendCommandToAll(SPEED_ALL, payload, 1);
+    char msg[64];
+    snprintf(msg, sizeof(msg), "Sent SPEED_ALL: %d%% to all cars", speed);
+    xQueueSend(dataQueue, msg, portMAX_DELAY);
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < maxClients; i++) {
       carStatuses[i].speed = speed;
       saveCarStatus((CarID)i);
     }
   }
 }
 
+//----------------------------------------------------------------------------------------------------
 // Biến tĩnh để theo dõi trạng thái dropdown Speed CAR1 (dropdown)
 static bool isCar1ModeDropdownOpen = false;
 static int lastCar1ModeValue = -1;
-
-//----------------------------------------------------------------------------------------------------
 
 void Car1Mode(lv_event_t * e) {
   Serial.println("Car1Mode function called!");
