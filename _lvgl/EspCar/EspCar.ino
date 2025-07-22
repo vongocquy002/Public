@@ -69,15 +69,16 @@ struct CarStatus {
   uint8_t gpio[6];
   bool all_on;
   uint8_t speed_all;
+  uint8_t battery_level;
 };
 
 // Lưu trạng thái cho từng xe
 CarStatus carStatuses[maxClients] = {
-  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100},
-  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100},
-  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100},
-  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100},
-  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100}
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 0},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 0},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 0},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 0},
+  {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 0}
 };
 
 // Lưu trạng thái xe vào NVS
@@ -87,6 +88,7 @@ void saveCarStatus(CarID carId) {
   preferences.putBool((key + "_on").c_str(), carStatuses[carId].isOn);
   preferences.putUChar((key + "_speed").c_str(), carStatuses[carId].speed);
   preferences.putUChar((key + "_mode").c_str(), carStatuses[carId].mode);
+  preferences.putUChar((key + "_battery").c_str(), carStatuses[carId].battery_level);
   for (int i = 0; i < 6; i++) {
     preferences.putUChar((key + "_gpio" + String(i)).c_str(), carStatuses[carId].gpio[i]);
   }
@@ -112,7 +114,10 @@ void restoreCarStatus() {
 
 // Tạo và gửi frame
 void sendCommand(WiFiClient &client, CommandType cmd, CarID carId, uint8_t *payload, uint8_t payloadLen) {
-  xSemaphoreTake(clientMutex, portMAX_DELAY);
+  if (xSemaphoreTake(clientMutex, pdMS_TO_TICKS(100)) != pdTRUE) {
+    Serial.printf("Cannot take semaphore for command 0x%02X\n", cmd);
+    return;
+  }
   if (!client.connected()) {
     Serial.printf("Client not connected for command 0x%02X\n", cmd);
     xSemaphoreGive(clientMutex);
@@ -150,7 +155,7 @@ void sendCommandToAll(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
       Serial.printf("Sending to client %d (%s)\n", i, clients[i].remoteIP().toString().c_str());
       sendCommand(clients[i], cmd, ALL_CARS, payload, payloadLen);
       sentCount++;
-      vTaskDelay(10 / portTICK_PERIOD_MS); // Delay 10ms giữa các client
+      vTaskDelay(10 / portTICK_PERIOD_MS);
     } else {
       Serial.printf("Client %d not connected, skipping\n", i);
     }
@@ -161,16 +166,18 @@ void sendCommandToAll(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
     Serial.printf("Sent command 0x%02X to %d clients\n", cmd, sentCount);
   }
 }
+
 // Tìm CarID dựa trên IP
 CarID getCarIdByIP(IPAddress ip) {
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < maxClients; i++) {
     if (carConfigs[i].ip == ip) {
       return carConfigs[i].id;
     }
   }
-  return CAR1; // Mặc định trả về CAR1 nếu không tìm thấy
+  return CAR1;
 }
 
+// Kiểm tra trạng thái client
 void checkClientStatus() {
   if (xSemaphoreTake(clientMutex, pdMS_TO_TICKS(1000)) == pdTRUE) {
     for (int i = 0; i < maxClients; i++) {
@@ -191,7 +198,7 @@ void checkClientStatus() {
 void clientTask(void *pvParameters) {
   int clientId = (int)pvParameters;
   while (1) {
-    xSemaphoreTake(clientMutex, portMAX_DELAY);
+    xSemaphoreTake(clientMutex, pdMS_TO_TICKS(100));
     if (!clients[clientId].connected()) {
       CarID carId = getCarIdByIP(clients[clientId].remoteIP());
       char msg[64];
@@ -203,17 +210,17 @@ void clientTask(void *pvParameters) {
     }
 
     if (clients[clientId].available() >= 7) {
-      uint8_t buffer[256];
-      int len = clients[clientId].readBytes(buffer, 256);
+      uint8_t buffer[64]; // Giảm buffer size để tiết kiệm bộ nhớ
+      int len = clients[clientId].readBytes(buffer, sizeof(buffer));
       if (len >= 7 && buffer[0] == 0xAA && buffer[1] == 0x01 && buffer[len-1] == 0xFF) {
         uint8_t cmd = buffer[2];
         uint8_t carId = buffer[3];
         uint8_t dataLen = buffer[4];
-        if (len >= 6 + dataLen && (carId <= CAR5 || carId == 0xFF)) {
+        if (len >= 6 + dataLen && (carId <= CAR5 || carId == ALL_CARS)) {
           uint8_t checksum = 0;
           for (int i = 0; i < len-2; i++) checksum += buffer[i];
           if (checksum == buffer[len-2]) {
-            CarID id = (carId == 0xFF) ? getCarIdByIP(clients[clientId].remoteIP()) : (CarID)carId;
+            CarID id = (carId == ALL_CARS) ? getCarIdByIP(clients[clientId].remoteIP()) : (CarID)carId;
             char msg[128];
             bool resend = false;
             switch (cmd) {
@@ -277,6 +284,13 @@ void clientTask(void *pvParameters) {
                          carStatuses[id].gpio[0], carStatuses[id].gpio[1], carStatuses[id].gpio[2],
                          carStatuses[id].gpio[3], carStatuses[id].gpio[4], carStatuses[id].gpio[5]);
                 break;
+              case BAT_REPORT:
+                if (dataLen == 1) {
+                  carStatuses[id].battery_level = buffer[5];
+                  saveCarStatus(id);
+                  snprintf(msg, sizeof(msg), "Car%d: Battery=%d%%", id + 1, carStatuses[id].battery_level);
+                }
+                break;
             }
             if (msg[0] != '\0') xQueueSend(dataQueue, msg, portMAX_DELAY);
             clients[clientId].write("OK", 2);
@@ -294,7 +308,7 @@ void serverTask(void *pvParameters) {
   while (1) {
     WiFiClient newClient = server.accept();
     if (newClient) {
-      xSemaphoreTake(clientMutex, portMAX_DELAY);
+      xSemaphoreTake(clientMutex, pdMS_TO_TICKS(100));
       bool added = false;
       for (int i = 0; i < maxClients; i++) {
         if (!clients[i].connected()) {
@@ -302,17 +316,17 @@ void serverTask(void *pvParameters) {
           CarID carId = getCarIdByIP(newClient.remoteIP());
           char msg[64];
           snprintf(msg, sizeof(msg), "New client: Car%d (%s)", carId + 1, newClient.remoteIP().toString().c_str());
-          xQueueSend(dataQueue, msg, portMAX_DELAY);
+          xQueueSend(dataQueue, msg, pdMS_TO_TICKS(100));
           char taskName[20];
           snprintf(taskName, sizeof(taskName), "ClientTask%d", i);
-          xTaskCreate(clientTask, taskName, 4096, (void *)i, 1, NULL); // Giảm stack size
+          xTaskCreate(clientTask, taskName, 8192, (void *)i, 1, NULL);
           added = true;
           break;
         }
       }
       if (!added) {
         char msg[32] = "Max clients reached!";
-        xQueueSend(dataQueue, msg, portMAX_DELAY);
+        xQueueSend(dataQueue, msg, pdMS_TO_TICKS(100));
         newClient.stop();
       }
       xSemaphoreGive(clientMutex);
@@ -393,6 +407,13 @@ void setup()
     Serial.println("Creating UI");
     /* Lock the mutex due to the LVGL APIs are not thread-safe */
 
+    // Khởi tạo LVGL UI
+    lvgl_port_lock(-1);
+
+    /* Release the mutex */
+    lvgl_port_unlock();
+    ui_init();
+    Serial.println(title + " end");
      // Khôi phục trạng thái xe từ NVS
     //restoreCarStatus();
 
@@ -412,17 +433,17 @@ void setup()
     xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 2, NULL);
     xTaskCreate(serverTask, "ServerTask", 8192, NULL, 2, NULL);
     xTaskCreate(printTask, "PrintTask", 4096, NULL, 1, NULL);
-    //xTaskCreate(lvglTask, "LVGLTask", 4096, NULL, 1, NULL);
+    //xTaskCreate(lvglTask, "LVGLTask", 8192, NULL, 1, NULL);
 
     Serial.printf("Setup complete. Free heap: %d bytes\n", ESP.getFreeHeap());
 
-    // Khởi tạo LVGL UI
-    lvgl_port_lock(-1);
+    // // Khởi tạo LVGL UI
+    // lvgl_port_lock(-1);
 
-    /* Release the mutex */
-    lvgl_port_unlock();
-    ui_init();
-    Serial.println(title + " end");
+    // /* Release the mutex */
+    // lvgl_port_unlock();
+    // ui_init();
+    // Serial.println(title + " end");
 }
 
 void loop()
