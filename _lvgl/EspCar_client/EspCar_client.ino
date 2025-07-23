@@ -22,14 +22,15 @@ enum CommandType {
   MODE = 0x05,
   GPIO_CONTROL = 0x06,
   STATUS_REPORT = 0x07,
-  BAT_REPORT = 0x08
+  BAT_REPORT = 0x08,
+  DIRECTION = 0x09 // New command for direction control
 };
 
 // GPIO and PWM configuration
-const int motor_pwm_a = 18; // Thay GPIO 26 bằng 18 (an toàn trên ESP32-C6)
-const int motor_pwm_b = 19; // Thay GPIO 27 bằng 19
+const int motor_pwm_a = 20; // Matches test code
+const int motor_pwm_b = 21; // Matches test code
 const int gpio_pins[6] = {5, 6, 7, 8, 9, 10};
-const int pwm_freq = 1000;
+const int pwm_freq = 5000; // Matches test code (5 kHz)
 const int pwm_resolution = 8;
 const int pwm_channel_a = 0;
 const int pwm_channel_b = 1;
@@ -42,9 +43,10 @@ struct CarStatus {
   uint8_t gpio[6];
   bool all_on;
   uint8_t speed_all;
+  uint8_t direction; // 0: Stop, 1: Forward, 2: Reverse
 };
 
-CarStatus car_status = {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100};
+CarStatus car_status = {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 1}; // Default direction: Forward
 Preferences preferences;
 WiFiClient client;
 
@@ -59,6 +61,7 @@ void saveCarStatus() {
   }
   preferences.putBool("all_on", car_status.all_on);
   preferences.putUChar("speed_all", car_status.speed_all);
+  preferences.putUChar("direction", car_status.direction);
   preferences.end();
   Serial.println("Car status saved to NVS");
 }
@@ -74,8 +77,37 @@ void restoreCarStatus() {
   }
   car_status.all_on = preferences.getBool("all_on", true);
   car_status.speed_all = preferences.getUChar("speed_all", 100);
+  car_status.direction = preferences.getUChar("direction", 1); // Default: Forward
   preferences.end();
   Serial.println("Car status restored from NVS");
+}
+
+// Update motor based on isOn, all_on, speed, and direction
+void updateMotor() {
+  uint32_t duty = (car_status.isOn && car_status.all_on) ? (car_status.speed * 255) / 100 : 0;
+  uint32_t final_pwm_a = 0;
+  uint32_t final_pwm_b = 0;
+
+  if (car_status.isOn && car_status.all_on) {
+    if (car_status.direction == 1) { // Forward
+      final_pwm_a = duty;
+      Serial.println("Motor: FORWARD");
+    } else if (car_status.direction == 2) { // Reverse
+      final_pwm_b = duty;
+      Serial.println("Motor: REVERSE");
+    } else { // Stop
+      Serial.println("Motor: STOP");
+    }
+  } else {
+    Serial.println("Motor: STOP (isOn or all_on is false)");
+  }
+
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, final_pwm_a);
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, final_pwm_b);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
+  Serial.printf("Motor updated: isOn=%d, all_on=%d, speed=%d, direction=%d, duty_a=%d, duty_b=%d\n", 
+                car_status.isOn, car_status.all_on, car_status.speed, car_status.direction, final_pwm_a, final_pwm_b);
 }
 
 // Send command to server
@@ -83,6 +115,9 @@ void sendCommand(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
   if (!client.connected()) {
     Serial.println("Client not connected, cannot send command!");
     return;
+  }
+  while (client.available()) {
+    client.read();
   }
   uint8_t frame[32];
   frame[0] = 0xAA;
@@ -106,14 +141,29 @@ void sendCommand(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
   if (client.write(frame, 7 + payloadLen) != 7 + payloadLen) {
     Serial.println("Failed to send command to server!");
   }
+  client.clear();
 }
 
 // Send battery report
 void sendBatteryReport() {
-  uint8_t battery_level = random(0, 101); // Giả lập pin
+  uint8_t battery_level = random(0, 101);
   uint8_t payload[1] = {battery_level};
   sendCommand(BAT_REPORT, payload, 1);
   Serial.printf("Sent BAT_REPORT: %d%%\n", battery_level);
+}
+
+// Send status report
+void sendStatusReport() {
+  uint8_t payload[10] = {
+    (uint8_t)car_status.isOn,
+    car_status.speed,
+    car_status.mode,
+    car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
+    car_status.gpio[3], car_status.gpio[4], car_status.gpio[5],
+    car_status.direction
+  };
+  sendCommand(STATUS_REPORT, payload, 10);
+  Serial.println("Sent STATUS_REPORT");
 }
 
 // Battery task
@@ -124,7 +174,7 @@ void batteryTask(void *pvParameters) {
     } else {
       Serial.println("BatteryTask: Client not connected, skipping BAT_REPORT");
     }
-    vTaskDelay(5000 / portTICK_PERIOD_MS); // Gửi mỗi 5 giây
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
   }
 }
 
@@ -133,9 +183,23 @@ void wifiTask(void *pvParameters) {
   while (1) {
     if (WiFi.status() != WL_CONNECTED) {
       Serial.println("WiFi disconnected, reconnecting...");
-      WiFi.reconnect();
-    } else if (!client.connected()) {
+      WiFi.disconnect();
+      WiFi.begin(ssid, password);
+      unsigned long start = millis();
+      while (WiFi.status() != WL_CONNECTED && millis() - start < 15000) {
+        Serial.print(".");
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+      }
+      if (WiFi.status() == WL_CONNECTED) {
+        Serial.println("\nReconnected to WiFi");
+        Serial.println(WiFi.localIP());
+      } else {
+        Serial.println("\nFailed to reconnect to WiFi");
+      }
+    }
+    if (WiFi.status() == WL_CONNECTED && !client.connected()) {
       Serial.println("Server disconnected, reconnecting...");
+      client.stop();
       if (client.connect(server_ip, server_port)) {
         Serial.println("Reconnected to server");
       } else {
@@ -151,11 +215,12 @@ void clientTask(void *pvParameters) {
   while (1) {
     if (!client.connected()) {
       Serial.println("ClientTask: Client not connected, waiting...");
-      vTaskDelay(100 / portTICK_PERIOD_MS);
+      vTaskDelay(10 / portTICK_PERIOD_MS);
       continue;
     }
     if (client.available() >= 7) {
       uint8_t buffer[32];
+      client.setTimeout(100);
       int len = client.readBytes(buffer, sizeof(buffer));
       Serial.printf("Received packet: len=%d\n", len);
       Serial.print("Packet: ");
@@ -165,67 +230,104 @@ void clientTask(void *pvParameters) {
         Serial.print(" ");
       }
       Serial.println();
-      if (len >= 7 && buffer[0] == 0xAA && buffer[1] == 0x01 && buffer[len-1] == 0xFF) {
-        uint8_t cmd = buffer[2];
-        uint8_t carId = buffer[3];
-        uint8_t dataLen = buffer[4];
-        Serial.printf("Packet info: cmd=0x%02X, car_id=%d, dataLen=%d\n", cmd, carId, dataLen);
-        if (len >= 6 + dataLen && (carId == car_id || carId == ALL_CARS)) {
-          uint8_t checksum = 0;
-          for (int i = 0; i < len-2; i++) checksum += buffer[i];
-          if (checksum == buffer[len-2]) {
-            Serial.print("Payload: ");
-            for (int i = 0; i < dataLen; i++) {
-              if (buffer[5+i] < 0x10) Serial.print("0");
-              Serial.print(buffer[5+i], HEX);
-              Serial.print(" ");
-            }
-            Serial.println();
-            switch (cmd) {
-              case ON_OFF_ALL:
-              case ON_OFF_CAR:
-                car_status.isOn = buffer[5];
-                saveCarStatus();
-                Serial.printf("Received ON_OFF_%s: %s\n", cmd == ON_OFF_ALL ? "ALL" : "CAR", car_status.isOn ? "ON" : "OFF");
-                break;
-              case SPEED_ALL:
-              case SPEED_CAR:
-                car_status.speed = buffer[5];
-                saveCarStatus();
-                Serial.printf("Received SPEED_%s: %d%%\n", cmd == SPEED_ALL ? "ALL" : "CAR", car_status.speed);
-                break;
-              case MODE:
-                car_status.mode = buffer[5];
-                saveCarStatus();
-                Serial.printf("Received MODE: %d\n", car_status.mode);
-                break;
-              case GPIO_CONTROL:
-                for (int i = 0; i < 6; i++) car_status.gpio[i] = buffer[5 + i];
-                saveCarStatus();
-                Serial.printf("Received GPIO_CONTROL: %d %d %d %d %d %d\n", 
-                              car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
-                              car_status.gpio[3], car_status.gpio[4], car_status.gpio[5]);
-                break;
-            }
-            client.write("OK", 2);
-            // Send STATUS_REPORT after updating status
-            uint8_t payload[9] = {
-              (uint8_t)car_status.isOn, car_status.speed, car_status.mode,
-              car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
-              car_status.gpio[3], car_status.gpio[4], car_status.gpio[5]
-            };
-            sendCommand(STATUS_REPORT, payload, 9);
-          } else {
-            Serial.println("Checksum error!");
+      // Sync frame, find AA 01
+      int frameStart = -1;
+      for (int i = 0; i < len - 1; i++) {
+        if (buffer[i] == 0xAA && buffer[i+1] == 0x01) {
+          frameStart = i;
+          break;
+        }
+      }
+      if (frameStart == -1 || frameStart + 7 > len) {
+        Serial.println("No valid frame found!");
+        while (client.available()) {
+          client.read();
+        }
+        continue;
+      }
+      // Check frame length and footer
+      int frameLen = buffer[frameStart + 4] + 7;
+      if (frameStart + frameLen > len || buffer[frameStart + frameLen - 1] != 0xFF) {
+        Serial.println("Invalid packet header or footer!");
+        while (client.available()) {
+          client.read();
+        }
+        continue;
+      }
+      uint8_t cmd = buffer[frameStart + 2];
+      uint8_t carId = buffer[frameStart + 3];
+      uint8_t dataLen = buffer[frameStart + 4];
+      Serial.printf("Packet info: cmd=0x%02X, car_id=%d, dataLen=%d\n", cmd, carId, dataLen);
+      if (frameLen >= 7 && frameLen <= len && (carId == car_id || carId == ALL_CARS)) {
+        uint8_t checksum = 0;
+        for (int i = frameStart; i < frameStart + frameLen - 2; i++) checksum += buffer[i];
+        if (checksum == buffer[frameStart + frameLen - 2]) {
+          Serial.print("Payload: ");
+          for (int i = 0; i < dataLen; i++) {
+            if (buffer[frameStart + 5 + i] < 0x10) Serial.print("0");
+            Serial.print(buffer[frameStart + 5 + i], HEX);
+            Serial.print(" ");
           }
+          Serial.println();
+          switch (cmd) {
+            case ON_OFF_ALL:
+              car_status.all_on = buffer[frameStart + 5];
+              saveCarStatus();
+              updateMotor();
+              Serial.printf("Received ON_OFF_ALL: %s\n", car_status.all_on ? "ON" : "OFF");
+              break;
+            case ON_OFF_CAR:
+              car_status.isOn = buffer[frameStart + 5];
+              saveCarStatus();
+              updateMotor();
+              Serial.printf("Received ON_OFF_CAR: %s\n", car_status.isOn ? "ON" : "OFF");
+              break;
+            case SPEED_ALL:
+              car_status.speed_all = buffer[frameStart + 5];
+              saveCarStatus();
+              updateMotor();
+              Serial.printf("Received SPEED_ALL: %d%%\n", car_status.speed_all);
+              break;
+            case SPEED_CAR:
+              car_status.speed = buffer[frameStart + 5];
+              saveCarStatus();
+              updateMotor();
+              Serial.printf("Received SPEED_CAR: %d%%\n", car_status.speed);
+              break;
+            case MODE:
+              car_status.mode = buffer[frameStart + 5];
+              saveCarStatus();
+              Serial.printf("Received MODE: %d\n", car_status.mode);
+              break;
+            case GPIO_CONTROL:
+              for (int i = 0; i < 6; i++) car_status.gpio[i] = buffer[frameStart + 5 + i];
+              saveCarStatus();
+              Serial.printf("Received GPIO_CONTROL: %d %d %d %d %d %d\n", 
+                            car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
+                            car_status.gpio[3], car_status.gpio[4], car_status.gpio[5]);
+              break;
+            case DIRECTION:
+              car_status.direction = buffer[frameStart + 5]; // 0: Stop, 1: Forward, 2: Reverse
+              saveCarStatus();
+              updateMotor();
+              Serial.printf("Received DIRECTION: %d\n", car_status.direction);
+              break;
+          }
+          client.write("OK", 2);
+          client.clear();
+          vTaskDelay(10 / portTICK_PERIOD_MS);
+          sendStatusReport();
         } else {
-          Serial.println("Invalid packet format or car ID!");
+          Serial.println("Checksum error!");
         }
       } else {
-        Serial.println("Invalid packet header or footer!");
+        Serial.println("Invalid packet format or car ID!");
+        while (client.available()) {
+          client.read();
+        }
       }
     }
-    vTaskDelay(100 / portTICK_PERIOD_MS); // Tăng delay để nhường CPU
+    vTaskDelay(10 / portTICK_PERIOD_MS);
   }
 }
 
@@ -270,36 +372,50 @@ void setup() {
     Serial.println("Failed to configure LEDC channels");
   }
 
-  // Restore car status
+  // Test motor for 5 seconds
+  Serial.println("Testing motor for 5 seconds...");
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, 128); // 50% duty, forward
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, 0);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
+  delay(5000);
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, 0);
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, 0);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
+  ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
+  Serial.println("Motor test complete");
+
+  // Restore car status and update motor
   Serial.println("Restoring car status...");
   restoreCarStatus();
+  updateMotor();
 
   // Connect to WiFi with timeout
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi");
   unsigned long start = millis();
-  while (WiFi.status() != WL_CONNECTED && millis() - start < 15000) {
+  while (WiFi.status() != WL_CONNECTED && millis() - start < 20000) {
     Serial.print(".");
     delay(500);
   }
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("\nFailed to connect to WiFi");
-    return;
+    while (1) { delay(1000); }
   }
   Serial.println("\nConnected to WiFi");
   Serial.println(WiFi.localIP());
 
   // Connect to server with timeout
   start = millis();
-  while (!client.connect(server_ip, server_port) && millis() - start < 10000) {
+  while (!client.connect(server_ip, server_port) && millis() - start < 15000) {
     Serial.println("Connecting to server...");
-    delay(500);
+    delay(1000);
   }
   if (client.connected()) {
     Serial.println("Connected to server");
   } else {
     Serial.println("Failed to connect to server");
-    return;
+    while (1) { delay(1000); }
   }
 
   // Create tasks
@@ -310,9 +426,9 @@ void setup() {
   if (xTaskCreate(clientTask, "ClientTask", 4096, NULL, 1, NULL) != pdPASS) {
     Serial.println("Failed to create ClientTask");
   }
-  // if (xTaskCreate(batteryTask, "BatteryTask", 2048, NULL, 1, NULL) != pdPASS) {
-  //   Serial.println("Failed to create BatteryTask");
-  // }
+  if (xTaskCreate(batteryTask, "BatteryTask", 2048, NULL, 1, NULL) != pdPASS) {
+    Serial.println("Failed to create BatteryTask");
+  }
 
   Serial.printf("Setup complete. Free heap: %d bytes\n", ESP.getFreeHeap());
 }
