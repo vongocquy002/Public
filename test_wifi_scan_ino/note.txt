@@ -1,0 +1,16 @@
+esp32: 3.2.0
+lvgl: 8.3.6
+esp32 display panel: 1.0.2
+esp32 io expander: 1.1.1
+utils: 0.2.3
+
+TCP/IP FRAME
+header (2byte)
+command type (1byte)
+car id (1byte)
+data length (1byte) max (255byte)
+payload ()
+checksum (1byte)
+footer (1byte)
+[Header: 2 byte][Command Type: 1 byte][Car ID: 1 byte][Data Length: 1 byte][Payload: N byte][Checksum: 1 byte][Footer: 1 byte]
+
