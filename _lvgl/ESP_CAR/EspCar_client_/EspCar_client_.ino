@@ -1,3 +1,4 @@
+
 #include <Arduino.h>
 #include <WiFi.h>
 #include <Preferences.h>
@@ -9,9 +10,14 @@ const char* password = "12345678";
 const char* server_ip = "192.168.4.1";
 const uint16_t server_port = 12345;
 
+// Static IP configuration for Car2
+IPAddress local_IP(192, 168, 4, 3);
+IPAddress gateway(192, 168, 4, 1);
+IPAddress subnet(255, 255, 255, 0);
+
 // Car configuration
 enum CarID { CAR1, CAR2, CAR3, CAR4, CAR5, ALL_CARS = 0xFF };
-const CarID car_id = CAR1;
+const CarID car_id = CAR2;
 
 // Command Types
 enum CommandType {
@@ -23,14 +29,13 @@ enum CommandType {
   GPIO_CONTROL  = 0x06,
   STATUS_REPORT = 0x07,
   BAT_REPORT    = 0x08,
-  DIRECTION     = 0x09 // New command for direction control
 };
 
 // GPIO and PWM configuration
-const int motor_pwm_a = 20; // Matches test code
-const int motor_pwm_b = 21; // Matches test code
+const int motor_pwm_a = 20;
+const int motor_pwm_b = 21;
 const int gpio_pins[6] = {5, 6, 7, 8, 9, 10};
-const int pwm_freq = 5000; // Matches test code (5 kHz)
+const int pwm_freq = 5000;
 const int pwm_resolution = 8;
 const int pwm_channel_a = 0;
 const int pwm_channel_b = 1;
@@ -39,14 +44,13 @@ const int pwm_channel_b = 1;
 struct CarStatus {
   bool isOn;
   uint8_t speed;
-  uint8_t mode;
+  uint8_t mode; // 0: Forward, 1: Reverse
   uint8_t gpio[6];
   bool all_on;
   uint8_t speed_all;
-  uint8_t direction; // 0: Stop, 1: Forward, 2: Reverse
 };
 
-CarStatus car_status = {false, 0, 1, {0, 0, 0, 0, 0, 0}, true, 100, 1}; // Default direction: Forward
+CarStatus car_status = {false, 0, 0, {0, 0, 0, 0, 0, 0}, true, 100}; // Default: Forward
 Preferences preferences;
 WiFiClient client;
 
@@ -61,7 +65,6 @@ void saveCarStatus() {
   }
   preferences.putBool("all_on", car_status.all_on);
   preferences.putUChar("speed_all", car_status.speed_all);
-  preferences.putUChar("direction", car_status.direction);
   preferences.end();
   Serial.println("Car status saved to NVS");
 }
@@ -71,32 +74,34 @@ void restoreCarStatus() {
   preferences.begin("car_status", true);
   car_status.isOn = preferences.getBool("isOn", false);
   car_status.speed = preferences.getUChar("speed", 0);
-  car_status.mode = preferences.getUChar("mode", 1);
+  car_status.mode = preferences.getUChar("mode", 0);
+  if (car_status.mode > 1) car_status.mode = 0;
   for (int i = 0; i < 6; i++) {
     car_status.gpio[i] = preferences.getUChar(("gpio" + String(i)).c_str(), 0);
   }
-  car_status.all_on = preferences.getBool("all_on", true);
+  car_status.all_on = preferences.getBool("all_on", false);
   car_status.speed_all = preferences.getUChar("speed_all", 100);
-  car_status.direction = preferences.getUChar("direction", 1); // Default: Forward
   preferences.end();
   Serial.println("Car status restored from NVS");
 }
 
-// Update motor based on isOn, all_on, speed, and direction
+// Update motor
 void updateMotor() {
-  uint32_t duty = (car_status.isOn && car_status.all_on) ? (car_status.speed * 255) / 100 : 0;
+  uint32_t duty = (car_status.isOn && car_status.all_on) ? (car_status.speed * car_status.speed_all * 255) / (100 * 100) : 0;
   uint32_t final_pwm_a = 0;
   uint32_t final_pwm_b = 0;
 
   if (car_status.isOn && car_status.all_on) {
-    if (car_status.direction == 1) { // Forward
+    if (car_status.mode == 0) {
       final_pwm_a = duty;
       Serial.println("Motor: FORWARD");
-    } else if (car_status.direction == 2) { // Reverse
+    } else if (car_status.mode == 1) {
       final_pwm_b = duty;
       Serial.println("Motor: REVERSE");
-    } else { // Stop
-      Serial.println("Motor: STOP");
+    } else {
+      Serial.println("Motor: STOP (Invalid mode)");
+      car_status.mode = 0;
+      saveCarStatus();
     }
   } else {
     Serial.println("Motor: STOP (isOn or all_on is false)");
@@ -106,8 +111,8 @@ void updateMotor() {
   ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, final_pwm_b);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
-  Serial.printf("Motor updated: isOn=%d, all_on=%d, speed=%d, direction=%d, duty_a=%d, duty_b=%d\n", 
-                car_status.isOn, car_status.all_on, car_status.speed, car_status.direction, final_pwm_a, final_pwm_b);
+  Serial.printf("Motor updated: isOn=%d, all_on=%d, speed=%d, mode=%d, duty_a=%d, duty_b=%d\n", 
+                car_status.isOn, car_status.all_on, car_status.speed, car_status.mode, final_pwm_a, final_pwm_b);
 }
 
 // Send command to server
@@ -141,9 +146,8 @@ void sendCommand(CommandType cmd, uint8_t* payload, uint8_t payloadLen) {
   if (client.write(frame, 7 + payloadLen) != 7 + payloadLen) {
     Serial.println("Failed to send command to server!");
   }
-  client.clear();
+  client.flush();
 }
-
 
 // Send status report
 void sendStatusReport() {
@@ -153,10 +157,11 @@ void sendStatusReport() {
     car_status.mode,
     car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
     car_status.gpio[3], car_status.gpio[4], car_status.gpio[5],
-    car_status.direction
+    0
   };
   sendCommand(STATUS_REPORT, payload, 10);
-  Serial.println("Sent STATUS_REPORT");
+  Serial.printf("Sent STATUS_REPORT: isOn=%d, speed=%d, mode=%d\n", 
+                car_status.isOn, car_status.speed, car_status.mode);
 }
 
 // WiFi task
@@ -165,17 +170,20 @@ void wifiTask(void *pvParameters) {
     if (WiFi.status() != WL_CONNECTED) {
       Serial.println("WiFi disconnected, reconnecting...");
       WiFi.disconnect();
+      WiFi.config(local_IP, gateway, subnet);
       WiFi.begin(ssid, password);
       unsigned long start = millis();
-      while (WiFi.status() != WL_CONNECTED && millis() - start < 15000) {
+      while (WiFi.status() != WL_CONNECTED && millis() - start < 10000) {
         Serial.print(".");
         vTaskDelay(500 / portTICK_PERIOD_MS);
       }
       if (WiFi.status() == WL_CONNECTED) {
         Serial.println("\nReconnected to WiFi");
         Serial.println(WiFi.localIP());
+        ESP.restart();
       } else {
         Serial.println("\nFailed to reconnect to WiFi");
+        ESP.restart();
       }
     }
     if (WiFi.status() == WL_CONNECTED && !client.connected()) {
@@ -183,8 +191,10 @@ void wifiTask(void *pvParameters) {
       client.stop();
       if (client.connect(server_ip, server_port)) {
         Serial.println("Reconnected to server");
+        sendStatusReport();
       } else {
         Serial.println("Failed to reconnect to server");
+        ESP.restart();
       }
     }
     vTaskDelay(2000 / portTICK_PERIOD_MS);
@@ -196,12 +206,12 @@ void clientTask(void *pvParameters) {
   while (1) {
     if (!client.connected()) {
       Serial.println("ClientTask: Client not connected, waiting...");
-      vTaskDelay(10 / portTICK_PERIOD_MS);
+      vTaskDelay(100 / portTICK_PERIOD_MS);
       continue;
     }
     if (client.available() >= 7) {
       uint8_t buffer[32];
-      client.setTimeout(100);
+      client.setTimeout(500); // Tăng timeout
       int len = client.readBytes(buffer, sizeof(buffer));
       Serial.printf("Received packet: len=%d\n", len);
       Serial.print("Packet: ");
@@ -253,7 +263,7 @@ void clientTask(void *pvParameters) {
               car_status.all_on = buffer[frameStart + 5];
               saveCarStatus();
               updateMotor();
-              Serial.printf("Received ON_OFF_ALL: %s\n", car_status.all_on ? "ON" : "OFF");
+              Serial.printf(">>>>Received ON_OFF_ALL: %s\n", car_status.all_on ? "ON" : "OFF");
               break;
             case ON_OFF_CAR:
               car_status.isOn = buffer[frameStart + 5];
@@ -276,6 +286,7 @@ void clientTask(void *pvParameters) {
             case MODE:
               car_status.mode = buffer[frameStart + 5];
               saveCarStatus();
+              updateMotor();
               Serial.printf("Received MODE: %d\n", car_status.mode);
               break;
             case GPIO_CONTROL:
@@ -285,15 +296,9 @@ void clientTask(void *pvParameters) {
                             car_status.gpio[0], car_status.gpio[1], car_status.gpio[2],
                             car_status.gpio[3], car_status.gpio[4], car_status.gpio[5]);
               break;
-            case DIRECTION:
-              car_status.direction = buffer[frameStart + 5];
-              saveCarStatus();
-              updateMotor();
-              Serial.printf("Received DIRECTION: %d\n", car_status.direction);
-              break;
             case BAT_REPORT:
-              if (dataLen == 0) { // Yêu cầu từ server
-                uint8_t battery_level = random(0, 101); // Thay bằng đo pin thực sau
+              if (dataLen == 0) {
+                uint8_t battery_level = random(0, 101); // Thay bằng đo pin thực
                 uint8_t payload[1] = {battery_level};
                 sendCommand(BAT_REPORT, payload, 1);
                 Serial.printf("Sent BAT_REPORT: %d%%\n", battery_level);
@@ -301,7 +306,7 @@ void clientTask(void *pvParameters) {
               break;
           }
           client.write("OK", 2);
-          client.clear();
+          client.flush();
           vTaskDelay(10 / portTICK_PERIOD_MS);
           sendStatusReport();
         } else {
@@ -359,25 +364,27 @@ void setup() {
     Serial.println("Failed to configure LEDC channels");
   }
 
-  // Test motor for 5 seconds
+  // Test motor
   Serial.println("Testing motor for 5 seconds...");
-  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, 128); // 50% duty, forward
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, 128);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
   ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, 0);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
-  delay(5000);
+  delay(1000);
   ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a, 0);
-  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, 0);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_a);
+  ledc_set_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b, 0);
   ledc_update_duty(LEDC_LOW_SPEED_MODE, (ledc_channel_t)pwm_channel_b);
   Serial.println("Motor test complete");
 
-  // Restore car status and update motor
-  Serial.println("Restoring car status...");
+  // Restore car status
   restoreCarStatus();
   updateMotor();
+  Serial.printf("Initial status: isOn=%d, all_on=%d, speed=%d, mode=%d\n", 
+                car_status.isOn, car_status.all_on, car_status.speed, car_status.mode);
 
-  // Connect to WiFi with timeout
+  // Connect to WiFi with static IP
+  WiFi.config(local_IP, gateway, subnet);
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi");
   unsigned long start = millis();
@@ -392,25 +399,27 @@ void setup() {
   Serial.println("\nConnected to WiFi");
   Serial.println(WiFi.localIP());
 
-  // Connect to server with timeout
+  // Connect to server
   start = millis();
-  while (!client.connect(server_ip, server_port) && millis() - start < 15000) {
+  while (!client.connect(server_ip, server_port) && millis() - start < 10000) {
     Serial.println("Connecting to server...");
     delay(1000);
   }
   if (client.connected()) {
     Serial.println("Connected to server");
+    sendStatusReport();
   } else {
     Serial.println("Failed to connect to server");
+    ESP.restart();
     while (1) { delay(1000); }
   }
 
   // Create tasks
   Serial.println("Creating tasks...");
-  if (xTaskCreate(wifiTask, "WiFiTask", 4096, NULL, 2, NULL) != pdPASS) {
+  if (xTaskCreate(wifiTask, "WiFiTask", (1024*30), NULL, 2, NULL) != pdPASS) {
     Serial.println("Failed to create WiFiTask");
   }
-  if (xTaskCreate(clientTask, "ClientTask", 4096, NULL, 1, NULL) != pdPASS) {
+  if (xTaskCreate(clientTask, "ClientTask", (1024*30), NULL, 1, NULL) != pdPASS) {
     Serial.println("Failed to create ClientTask");
   }
 
@@ -420,7 +429,7 @@ void setup() {
 void loop() {
   static uint32_t last = 0;
   if (millis() - last > 5000) {
-    //Serial.printf("Free heap: %d bytes\n", ESP.getFreeHeap());
+    Serial.printf("Free heap: %d bytes\n", ESP.getFreeHeap());
     last = millis();
   }
   delay(100);

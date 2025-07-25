@@ -55,50 +55,50 @@
 // 	// Your code here
 // }
 
-void Car2Mode(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Mode(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2OnOff(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2OnOff(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Speed(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Speed(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io1Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io1Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io2Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io2Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io3Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io3Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io4Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io4Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io6Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io6Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
-void Car2Io5Func(lv_event_t * e)
-{
-	// Your code here
-}
+// void Car2Io5Func(lv_event_t * e)
+// {
+// 	// Your code here
+// }
 
 void Car3Mode(lv_event_t * e)
 {

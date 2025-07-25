@@ -1,0 +1,89 @@
+[Server: ESP32-S3]                                              [Client: ESP32-C6]
+   |                                                             |
+   | 1. Khởi động:                                              | 1. Khởi động:
+   |    - Thiết lập AP: 192.168.4.1:12345                   |    - Cấu hình PWM: chân 20, 21, 5kHz, 8-bit
+   |    - Khởi tạo LVGL, dataQueue, commandQueue,           |    - Kiểm tra motor: 5s, pwm_a=128, pwm_b=0
+   |      clientMutex                                       |    - Kết nối AP: 192.168.4.1
+   |    - Khôi phục carStatuses từ NVS                      |    - Kết nối server: 192.168.4.1:12345
+   |    - Task: serverTask, printTask,                      |    - Khôi phục car_status từ NVS
+   |      batteryRequestTask, lvglTask                      |    - Gọi updateMotor(): Tắt motor (isOn=false)
+   |    Log: Access Point created, Setup complete           |    - Task: wifiTask, clientTask
+   |                                                        |    Log: Connected to WiFi 192.168.4.2, server
+   |                                                        |
+   | 2. Giao diện LVGL:                                     |
+   |    - OnOffAllCar: ON (0x01, payload=0x01)              |
+   |    - Car1OnOff: ON (0x03, payload=0x01)                |
+   |    - SpeedAll: 70% (0x02, payload=0x46)                |
+   |    - Car1Speed: 70% (0x04, payload=0x46)               |
+   |    - Car1Mode: Forward (0x05, payload=0x01)            |
+   |    - Car1Io1-6: GPIO (0x06, payload=6 bytes)           |
+   |    -> Thêm vào commandQueue: {cmd, carId, payload, len}|
+   |    Log: OnOffAllCar: ON, Sent to all cars              |
+   |                                                        |
+   | 3. BatteryRequestTask:                                 |
+   |    - Gửi BAT_REPORT (0x08, payload=0) mỗi 20s          |
+   |    -> Thêm vào commandQueue                            |
+   |    Log: Sent BAT_REPORT request                        |
+   |                                                        |
+   | 4. ClientTask:                                         |
+   |    - Lấy lệnh từ commandQueue                          |
+   |    - Tạo frame: AA 01 [cmd] [carId] [dataLen]          |
+   |      [payload] [checksum] FF                           |
+   |    - Gửi frame qua TCP:                                |
+   |      ON_OFF_ALL: AA 01 01 FF 01 01 AD FF               |
+   |      ON_OFF_CAR: AA 01 03 00 01 01 AF FF               |
+   |      SPEED_ALL: AA 01 02 FF 01 46 E4 FF                |
+   |      SPEED_CAR: AA 01 04 00 01 46 F4 FF                |
+   |      BAT_REPORT: AA 01 08 FF 00 08 FF                  |
+   |    Log: Sending to client IP=192.168.4.2, Type=0x01    |
+   |                                                        |
+   |    --------------------------------------------->      | 5. ClientTask: Nhận Frame
+   |                                                        |    - Đọc buffer, kiểm tra AA 01 ... FF, checksum
+   |                                                        |    - Bỏ qua "OK" (4F 4B) để tránh lỗi footer
+   |                                                        |    - Nếu carId == CAR1 (0x00) hoặc ALL_CARS (0xFF):
+   |                                                        |      Xử lý lệnh:
+   |                                                        |      - ON_OFF_ALL: car_status.all_on = payload
+   |                                                        |      - ON_OFF_CAR: car_status.isOn = payload
+   |                                                        |      - SPEED_ALL: car_status.speed_all = payload
+   |                                                        |      - SPEED_CAR: car_status.speed = payload
+   |                                                        |      - MODE: car_status.mode = payload
+   |                                                        |      - GPIO_CONTROL: car_status.gpio[6] = payload
+   |                                                        |      - DIRECTION: car_status.direction = payload
+   |                                                        |      - BAT_REPORT (len=0): Gửi battery_level
+   |                                                        |    - Lưu vào NVS (saveCarStatus)
+   |                                                        |    Log: Received ON_OFF_ALL: ON, Car status saved
+   |                                                        |
+   |                                                        | 6. Update Motor:
+   |                                                        |    - Nếu isOn && all_on:
+   |                                                        |        duty = (car_status.speed * 255) / 100
+   |                                                        |        direction=1: pwm_a=duty, pwm_b=0 (Forward)
+   |                                                        |        direction=2: pwm_a=0, pwm_b=duty (Reverse)
+   |                                                        |        direction=0: pwm_a=pwm_b=0 (Stop)
+   |                                                        |    - Else: pwm_a=pwm_b=0 (Stop)
+   |                                                        |    Log: Motor: FORWARD, duty_a=178, duty_b=0
+   |                                                        |
+   |                                                        | 7. Gửi Phản hồi:
+   |                                                        |    - Gửi "OK" (0x4F 0x4B)
+   |                                                        |    - Gửi STATUS_REPORT:
+   |                                                        |        AA 01 07 00 0A [isOn] [speed] [mode]
+   |                                                        |        [gpio[6]] [direction] [checksum] FF
+   |                                                        |    - Gửi BAT_REPORT (nếu yêu cầu):
+   |                                                        |        AA 01 08 00 01 [battery_level] XX FF
+   |                                                        |    Log: Sent STATUS_REPORT, Sent BAT_REPORT: 85%
+   |                                                        |
+   | <---------------------------------------------         | 
+   | 8. ClientTask: Nhận Phản hồi                           |
+   |    - Kiểm tra frame: AA 01 ... FF, checksum            |
+   |    - Xử lý STATUS_REPORT: Cập nhật carStatuses         |
+   |      (isOn, speed, mode, gpio, direction)              |
+   |    - Xử lý BAT_REPORT: Cập nhật battery_level,         |
+   |      ui_Car1Batlabel                                   |
+   |    - Gửi "OK" đến client                               |
+   |    Log: Car1: Power=ON, Speed=70%, Battery=85%         |
+   |                                                        |
+   | 9. PrintTask: Cập nhật giao diện                       |
+   |    - ui_StatusArea: C1:On, C2:Off, ...                 |
+   |    - ui_Car1Batlabel: 85%                              |
+   |    Log: Updated ui_StatusArea, ui_Car1Batlabel         |
+   |                                                        |
+   [loop: Xử lý UI, gửi lệnh, nhận phản hồi]           [loop: Nhận lệnh, cập nhật motor, gửi phản hồi]

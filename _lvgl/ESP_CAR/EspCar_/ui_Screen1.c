@@ -12,31 +12,31 @@ lv_obj_t * ui_Car1 = NULL;
 lv_obj_t * ui_Car1panel = NULL;
 lv_obj_t * ui_Modepanel = NULL;
 lv_obj_t * ui_ModeCarLabel = NULL;
-lv_obj_t * ui_MotorMode = NULL;
+lv_obj_t * ui_ModeCar1 = NULL;
 lv_obj_t * ui_OnOffpanel = NULL;
 lv_obj_t * ui_OnOffCarLabel = NULL;
-lv_obj_t * ui_OnOffAllCarbtn3 = NULL;
+lv_obj_t * ui_OnOffCar1btn = NULL;
 lv_obj_t * ui_Speedpanel = NULL;
 lv_obj_t * ui_OnOffCarLabel3 = NULL;
-lv_obj_t * ui_Dropdown2 = NULL;
+lv_obj_t * ui_SpeedCar1 = NULL;
 lv_obj_t * ui_OnOffpanel2 = NULL;
 lv_obj_t * ui_OnOffCarLabel2 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn2 = NULL;
+lv_obj_t * ui_Car1Io1btn = NULL;
 lv_obj_t * ui_OnOffpanel3 = NULL;
 lv_obj_t * ui_OnOffCarLabel4 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn4 = NULL;
+lv_obj_t * ui_Car1Io2btn = NULL;
 lv_obj_t * ui_OnOffpanel1 = NULL;
 lv_obj_t * ui_OnOffCarLabel1 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn1 = NULL;
+lv_obj_t * ui_Car1Io3btn = NULL;
 lv_obj_t * ui_OnOffpanel4 = NULL;
 lv_obj_t * ui_OnOffCarLabel5 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn5 = NULL;
+lv_obj_t * ui_Car1Io4btn = NULL;
 lv_obj_t * ui_OnOffpanel5 = NULL;
 lv_obj_t * ui_OnOffCarLabel6 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn6 = NULL;
+lv_obj_t * ui_Car1Io6btn = NULL;
 lv_obj_t * ui_OnOffpanel6 = NULL;
 lv_obj_t * ui_OnOffCarLabel7 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn7 = NULL;
+lv_obj_t * ui_Car1Io5btn = NULL;
 lv_obj_t * ui_Batterypanel = NULL;
 lv_obj_t * ui_Label2 = NULL;
 lv_obj_t * ui_Car1Batlabel = NULL;
@@ -44,31 +44,31 @@ lv_obj_t * ui_Car2 = NULL;
 lv_obj_t * ui_Car2panel = NULL;
 lv_obj_t * ui_Modepanel2 = NULL;
 lv_obj_t * ui_ModeCarLabel2 = NULL;
-lv_obj_t * ui_MotorMode2 = NULL;
+lv_obj_t * ui_ModeCar2 = NULL;
 lv_obj_t * ui_OnOffpanel14 = NULL;
 lv_obj_t * ui_OnOffCarLabel16 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn15 = NULL;
+lv_obj_t * ui_OnOffCar2btn = NULL;
 lv_obj_t * ui_Speedpanel2 = NULL;
 lv_obj_t * ui_OnOffCarLabel8 = NULL;
-lv_obj_t * ui_Dropdown4 = NULL;
+lv_obj_t * ui_SpeedCar2 = NULL;
 lv_obj_t * ui_OnOffpanel7 = NULL;
 lv_obj_t * ui_OnOffCarLabel9 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn8 = NULL;
+lv_obj_t * ui_Car2Io1btn = NULL;
 lv_obj_t * ui_OnOffpanel8 = NULL;
 lv_obj_t * ui_OnOffCarLabel10 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn9 = NULL;
+lv_obj_t * ui_Car2Io2btn = NULL;
 lv_obj_t * ui_OnOffpanel9 = NULL;
 lv_obj_t * ui_OnOffCarLabel11 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn10 = NULL;
+lv_obj_t * ui_Car2Io3btn = NULL;
 lv_obj_t * ui_OnOffpanel10 = NULL;
 lv_obj_t * ui_OnOffCarLabel12 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn11 = NULL;
+lv_obj_t * ui_Car2Io4btn = NULL;
 lv_obj_t * ui_OnOffpanel11 = NULL;
 lv_obj_t * ui_OnOffCarLabel13 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn12 = NULL;
+lv_obj_t * ui_Car2Io6btn = NULL;
 lv_obj_t * ui_OnOffpanel12 = NULL;
 lv_obj_t * ui_OnOffCarLabel14 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn13 = NULL;
+lv_obj_t * ui_Car2Io5btn = NULL;
 lv_obj_t * ui_Batterypanel2 = NULL;
 lv_obj_t * ui_Label5 = NULL;
 lv_obj_t * ui_Car2Batlabel = NULL;
@@ -76,31 +76,31 @@ lv_obj_t * ui_Car3 = NULL;
 lv_obj_t * ui_Car3panel = NULL;
 lv_obj_t * ui_Modepanel3 = NULL;
 lv_obj_t * ui_ModeCarLabel3 = NULL;
-lv_obj_t * ui_MotorMode3 = NULL;
+lv_obj_t * ui_ModeCar3 = NULL;
 lv_obj_t * ui_OnOffpanel15 = NULL;
 lv_obj_t * ui_OnOffCarLabel17 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn16 = NULL;
+lv_obj_t * ui_OnOffCar3btn = NULL;
 lv_obj_t * ui_Speedpanel3 = NULL;
 lv_obj_t * ui_OnOffCarLabel18 = NULL;
-lv_obj_t * ui_Dropdown5 = NULL;
+lv_obj_t * ui_SpeedCar3 = NULL;
 lv_obj_t * ui_OnOffpanel16 = NULL;
 lv_obj_t * ui_OnOffCarLabel19 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn17 = NULL;
+lv_obj_t * ui_Car3Io1btn = NULL;
 lv_obj_t * ui_OnOffpanel17 = NULL;
 lv_obj_t * ui_OnOffCarLabel20 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn18 = NULL;
+lv_obj_t * ui_Car3Io2btn = NULL;
 lv_obj_t * ui_OnOffpanel18 = NULL;
 lv_obj_t * ui_OnOffCarLabel21 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn19 = NULL;
+lv_obj_t * ui_Car3Io3btn = NULL;
 lv_obj_t * ui_OnOffpanel19 = NULL;
 lv_obj_t * ui_OnOffCarLabel22 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn20 = NULL;
+lv_obj_t * ui_Car3Io4btn = NULL;
 lv_obj_t * ui_OnOffpanel20 = NULL;
 lv_obj_t * ui_OnOffCarLabel23 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn21 = NULL;
+lv_obj_t * ui_Car3Io6btn = NULL;
 lv_obj_t * ui_OnOffpanel21 = NULL;
 lv_obj_t * ui_OnOffCarLabel24 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn22 = NULL;
+lv_obj_t * ui_Car3Io5btn = NULL;
 lv_obj_t * ui_Batterypanel3 = NULL;
 lv_obj_t * ui_Label6 = NULL;
 lv_obj_t * ui_Car3Batlabel = NULL;
@@ -108,31 +108,31 @@ lv_obj_t * ui_Car4 = NULL;
 lv_obj_t * ui_Car4panel = NULL;
 lv_obj_t * ui_Modepanel4 = NULL;
 lv_obj_t * ui_ModeCarLabel4 = NULL;
-lv_obj_t * ui_MotorMode4 = NULL;
+lv_obj_t * ui_ModeCar4 = NULL;
 lv_obj_t * ui_OnOffpanel22 = NULL;
 lv_obj_t * ui_OnOffCarLabel25 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn23 = NULL;
+lv_obj_t * ui_OnOffCar4btn = NULL;
 lv_obj_t * ui_Speedpanel4 = NULL;
 lv_obj_t * ui_OnOffCarLabel26 = NULL;
-lv_obj_t * ui_Dropdown6 = NULL;
+lv_obj_t * ui_SpeedCar4 = NULL;
 lv_obj_t * ui_OnOffpanel23 = NULL;
 lv_obj_t * ui_OnOffCarLabel27 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn24 = NULL;
+lv_obj_t * ui_Car4Io1btn = NULL;
 lv_obj_t * ui_OnOffpanel24 = NULL;
 lv_obj_t * ui_OnOffCarLabel28 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn25 = NULL;
+lv_obj_t * ui_Car4Io2btn = NULL;
 lv_obj_t * ui_OnOffpanel25 = NULL;
 lv_obj_t * ui_OnOffCarLabel29 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn26 = NULL;
+lv_obj_t * ui_Car4Io3btn = NULL;
 lv_obj_t * ui_OnOffpanel26 = NULL;
 lv_obj_t * ui_OnOffCarLabel30 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn27 = NULL;
+lv_obj_t * ui_Car4Io4btn = NULL;
 lv_obj_t * ui_OnOffpanel27 = NULL;
 lv_obj_t * ui_OnOffCarLabel31 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn28 = NULL;
+lv_obj_t * ui_Car4Io6btn = NULL;
 lv_obj_t * ui_OnOffpanel28 = NULL;
 lv_obj_t * ui_OnOffCarLabel32 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn29 = NULL;
+lv_obj_t * ui_Car4Io5btn = NULL;
 lv_obj_t * ui_Batterypanel4 = NULL;
 lv_obj_t * ui_Label8 = NULL;
 lv_obj_t * ui_Car4Batlabel = NULL;
@@ -140,31 +140,31 @@ lv_obj_t * ui_Car5 = NULL;
 lv_obj_t * ui_Car5panel = NULL;
 lv_obj_t * ui_Modepanel5 = NULL;
 lv_obj_t * ui_ModeCarLabel5 = NULL;
-lv_obj_t * ui_MotorMode5 = NULL;
+lv_obj_t * ui_ModeCar5 = NULL;
 lv_obj_t * ui_OnOffpanel29 = NULL;
 lv_obj_t * ui_OnOffCarLabel33 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn30 = NULL;
+lv_obj_t * ui_OnOffCar5btn = NULL;
 lv_obj_t * ui_Speedpanel6 = NULL;
 lv_obj_t * ui_OnOffCarLabel35 = NULL;
-lv_obj_t * ui_Dropdown7 = NULL;
+lv_obj_t * ui_SpeedCar5 = NULL;
 lv_obj_t * ui_OnOffpanel30 = NULL;
 lv_obj_t * ui_OnOffCarLabel36 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn31 = NULL;
+lv_obj_t * ui_Car5Io1btn = NULL;
 lv_obj_t * ui_OnOffpanel31 = NULL;
 lv_obj_t * ui_OnOffCarLabel37 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn32 = NULL;
+lv_obj_t * ui_Car5Io2btn = NULL;
 lv_obj_t * ui_OnOffpanel32 = NULL;
 lv_obj_t * ui_OnOffCarLabel38 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn33 = NULL;
+lv_obj_t * ui_Car5Io3btn = NULL;
 lv_obj_t * ui_OnOffpanel33 = NULL;
 lv_obj_t * ui_OnOffCarLabel39 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn34 = NULL;
+lv_obj_t * ui_Car5Io4btn = NULL;
 lv_obj_t * ui_OnOffpanel34 = NULL;
 lv_obj_t * ui_OnOffCarLabel40 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn35 = NULL;
+lv_obj_t * ui_Car5Io6btn = NULL;
 lv_obj_t * ui_OnOffpanel35 = NULL;
 lv_obj_t * ui_OnOffCarLabel41 = NULL;
-lv_obj_t * ui_OnOffAllCarbtn36 = NULL;
+lv_obj_t * ui_Car5Io5btn = NULL;
 lv_obj_t * ui_Batterypanel5 = NULL;
 lv_obj_t * ui_Label10 = NULL;
 lv_obj_t * ui_Car5Batlabel = NULL;
@@ -175,7 +175,7 @@ lv_obj_t * ui_SpeedAllCardropdown = NULL;
 lv_obj_t * ui_OnOffAllCarbtn = NULL;
 lv_obj_t * ui_OnOffAllCarlabel = NULL;
 // event funtions
-void ui_event_MotorMode(lv_event_t * e)
+void ui_event_ModeCar1(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -184,7 +184,7 @@ void ui_event_MotorMode(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn3(lv_event_t * e)
+void ui_event_OnOffCar1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -193,7 +193,7 @@ void ui_event_OnOffAllCarbtn3(lv_event_t * e)
     }
 }
 
-void ui_event_Dropdown2(lv_event_t * e)
+void ui_event_SpeedCar1(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -202,7 +202,7 @@ void ui_event_Dropdown2(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn2(lv_event_t * e)
+void ui_event_Car1Io1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -211,7 +211,7 @@ void ui_event_OnOffAllCarbtn2(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn4(lv_event_t * e)
+void ui_event_Car1Io2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -220,7 +220,7 @@ void ui_event_OnOffAllCarbtn4(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn1(lv_event_t * e)
+void ui_event_Car1Io3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -229,7 +229,7 @@ void ui_event_OnOffAllCarbtn1(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn5(lv_event_t * e)
+void ui_event_Car1Io4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -238,7 +238,7 @@ void ui_event_OnOffAllCarbtn5(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn6(lv_event_t * e)
+void ui_event_Car1Io6btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -247,7 +247,7 @@ void ui_event_OnOffAllCarbtn6(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn7(lv_event_t * e)
+void ui_event_Car1Io5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -256,7 +256,7 @@ void ui_event_OnOffAllCarbtn7(lv_event_t * e)
     }
 }
 
-void ui_event_MotorMode2(lv_event_t * e)
+void ui_event_ModeCar2(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -265,7 +265,7 @@ void ui_event_MotorMode2(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn15(lv_event_t * e)
+void ui_event_OnOffCar2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -274,7 +274,7 @@ void ui_event_OnOffAllCarbtn15(lv_event_t * e)
     }
 }
 
-void ui_event_Dropdown4(lv_event_t * e)
+void ui_event_SpeedCar2(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -283,7 +283,7 @@ void ui_event_Dropdown4(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn8(lv_event_t * e)
+void ui_event_Car2Io1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -292,7 +292,7 @@ void ui_event_OnOffAllCarbtn8(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn9(lv_event_t * e)
+void ui_event_Car2Io2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -301,7 +301,7 @@ void ui_event_OnOffAllCarbtn9(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn10(lv_event_t * e)
+void ui_event_Car2Io3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -310,7 +310,7 @@ void ui_event_OnOffAllCarbtn10(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn11(lv_event_t * e)
+void ui_event_Car2Io4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -319,7 +319,7 @@ void ui_event_OnOffAllCarbtn11(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn12(lv_event_t * e)
+void ui_event_Car2Io6btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -328,7 +328,7 @@ void ui_event_OnOffAllCarbtn12(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn13(lv_event_t * e)
+void ui_event_Car2Io5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -337,7 +337,7 @@ void ui_event_OnOffAllCarbtn13(lv_event_t * e)
     }
 }
 
-void ui_event_MotorMode3(lv_event_t * e)
+void ui_event_ModeCar3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -346,7 +346,7 @@ void ui_event_MotorMode3(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn16(lv_event_t * e)
+void ui_event_OnOffCar3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -355,7 +355,7 @@ void ui_event_OnOffAllCarbtn16(lv_event_t * e)
     }
 }
 
-void ui_event_Dropdown5(lv_event_t * e)
+void ui_event_SpeedCar3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -364,7 +364,7 @@ void ui_event_Dropdown5(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn17(lv_event_t * e)
+void ui_event_Car3Io1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -373,7 +373,7 @@ void ui_event_OnOffAllCarbtn17(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn18(lv_event_t * e)
+void ui_event_Car3Io2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -382,7 +382,7 @@ void ui_event_OnOffAllCarbtn18(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn19(lv_event_t * e)
+void ui_event_Car3Io3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -391,7 +391,7 @@ void ui_event_OnOffAllCarbtn19(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn20(lv_event_t * e)
+void ui_event_Car3Io4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -400,7 +400,7 @@ void ui_event_OnOffAllCarbtn20(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn21(lv_event_t * e)
+void ui_event_Car3Io6btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -409,7 +409,7 @@ void ui_event_OnOffAllCarbtn21(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn22(lv_event_t * e)
+void ui_event_Car3Io5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -418,7 +418,7 @@ void ui_event_OnOffAllCarbtn22(lv_event_t * e)
     }
 }
 
-void ui_event_MotorMode4(lv_event_t * e)
+void ui_event_ModeCar4(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -427,7 +427,7 @@ void ui_event_MotorMode4(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn23(lv_event_t * e)
+void ui_event_OnOffCar4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -436,7 +436,7 @@ void ui_event_OnOffAllCarbtn23(lv_event_t * e)
     }
 }
 
-void ui_event_Dropdown6(lv_event_t * e)
+void ui_event_SpeedCar4(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -445,7 +445,7 @@ void ui_event_Dropdown6(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn24(lv_event_t * e)
+void ui_event_Car4Io1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -454,7 +454,7 @@ void ui_event_OnOffAllCarbtn24(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn25(lv_event_t * e)
+void ui_event_Car4Io2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -463,7 +463,7 @@ void ui_event_OnOffAllCarbtn25(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn26(lv_event_t * e)
+void ui_event_Car4Io3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -472,7 +472,7 @@ void ui_event_OnOffAllCarbtn26(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn27(lv_event_t * e)
+void ui_event_Car4Io4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -481,7 +481,7 @@ void ui_event_OnOffAllCarbtn27(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn28(lv_event_t * e)
+void ui_event_Car4Io6btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -490,7 +490,7 @@ void ui_event_OnOffAllCarbtn28(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn29(lv_event_t * e)
+void ui_event_Car4Io5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -499,7 +499,7 @@ void ui_event_OnOffAllCarbtn29(lv_event_t * e)
     }
 }
 
-void ui_event_MotorMode5(lv_event_t * e)
+void ui_event_ModeCar5(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -508,7 +508,7 @@ void ui_event_MotorMode5(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn30(lv_event_t * e)
+void ui_event_OnOffCar5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -517,7 +517,7 @@ void ui_event_OnOffAllCarbtn30(lv_event_t * e)
     }
 }
 
-void ui_event_Dropdown7(lv_event_t * e)
+void ui_event_SpeedCar5(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -526,7 +526,7 @@ void ui_event_Dropdown7(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn31(lv_event_t * e)
+void ui_event_Car5Io1btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -535,7 +535,7 @@ void ui_event_OnOffAllCarbtn31(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn32(lv_event_t * e)
+void ui_event_Car5Io2btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -544,7 +544,7 @@ void ui_event_OnOffAllCarbtn32(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn33(lv_event_t * e)
+void ui_event_Car5Io3btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -553,7 +553,7 @@ void ui_event_OnOffAllCarbtn33(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn34(lv_event_t * e)
+void ui_event_Car5Io4btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -562,7 +562,7 @@ void ui_event_OnOffAllCarbtn34(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn35(lv_event_t * e)
+void ui_event_Car5Io6btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -571,7 +571,7 @@ void ui_event_OnOffAllCarbtn35(lv_event_t * e)
     }
 }
 
-void ui_event_OnOffAllCarbtn36(lv_event_t * e)
+void ui_event_Car5Io5btn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -593,7 +593,7 @@ void ui_event_OnOffAllCarbtn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
+    if(event_code == LV_EVENT_RELEASED) {
         OnOffAllCar(e);
     }
 }
@@ -648,14 +648,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_ModeCarLabel, "MODE");
     lv_obj_set_style_text_font(ui_ModeCarLabel, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_MotorMode = lv_dropdown_create(ui_Modepanel);
-    lv_dropdown_set_options(ui_MotorMode, "Mode 1\nMode 2\n");
-    lv_obj_set_width(ui_MotorMode, 107);
-    lv_obj_set_height(ui_MotorMode, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_MotorMode, 49);
-    lv_obj_set_y(ui_MotorMode, 0);
-    lv_obj_set_align(ui_MotorMode, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_MotorMode, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_ModeCar1 = lv_dropdown_create(ui_Modepanel);
+    lv_dropdown_set_options(ui_ModeCar1, "Mode 1\nMode 2\n");
+    lv_obj_set_width(ui_ModeCar1, 107);
+    lv_obj_set_height(ui_ModeCar1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeCar1, 49);
+    lv_obj_set_y(ui_ModeCar1, 0);
+    lv_obj_set_align(ui_ModeCar1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ModeCar1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel, 228);
@@ -674,12 +674,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel, "ON/OFF ");
     lv_obj_set_style_text_font(ui_OnOffCarLabel, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn3 = lv_switch_create(ui_OnOffpanel);
-    lv_obj_set_width(ui_OnOffAllCarbtn3, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn3, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn3, 52);
-    lv_obj_set_y(ui_OnOffAllCarbtn3, -1);
-    lv_obj_set_align(ui_OnOffAllCarbtn3, LV_ALIGN_CENTER);
+    ui_OnOffCar1btn = lv_switch_create(ui_OnOffpanel);
+    lv_obj_set_width(ui_OnOffCar1btn, 58);
+    lv_obj_set_height(ui_OnOffCar1btn, 28);
+    lv_obj_set_x(ui_OnOffCar1btn, 52);
+    lv_obj_set_y(ui_OnOffCar1btn, -1);
+    lv_obj_set_align(ui_OnOffCar1btn, LV_ALIGN_CENTER);
 
     ui_Speedpanel = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_Speedpanel, 228);
@@ -698,14 +698,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel3, "SPEED");
     lv_obj_set_style_text_font(ui_OnOffCarLabel3, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Dropdown2 = lv_dropdown_create(ui_Speedpanel);
-    lv_dropdown_set_options(ui_Dropdown2, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
-    lv_obj_set_width(ui_Dropdown2, 107);
-    lv_obj_set_height(ui_Dropdown2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Dropdown2, 49);
-    lv_obj_set_y(ui_Dropdown2, 0);
-    lv_obj_set_align(ui_Dropdown2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Dropdown2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SpeedCar1 = lv_dropdown_create(ui_Speedpanel);
+    lv_dropdown_set_options(ui_SpeedCar1, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
+    lv_obj_set_width(ui_SpeedCar1, 107);
+    lv_obj_set_height(ui_SpeedCar1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SpeedCar1, 49);
+    lv_obj_set_y(ui_SpeedCar1, 0);
+    lv_obj_set_align(ui_SpeedCar1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SpeedCar1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel2 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel2, 134);
@@ -724,12 +724,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel2, "IO1");
     lv_obj_set_style_text_font(ui_OnOffCarLabel2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn2 = lv_switch_create(ui_OnOffpanel2);
-    lv_obj_set_width(ui_OnOffAllCarbtn2, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn2, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn2, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn2, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn2, LV_ALIGN_CENTER);
+    ui_Car1Io1btn = lv_switch_create(ui_OnOffpanel2);
+    lv_obj_set_width(ui_Car1Io1btn, 58);
+    lv_obj_set_height(ui_Car1Io1btn, 28);
+    lv_obj_set_x(ui_Car1Io1btn, 22);
+    lv_obj_set_y(ui_Car1Io1btn, 0);
+    lv_obj_set_align(ui_Car1Io1btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel3 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel3, 134);
@@ -748,12 +748,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel4, "IO2");
     lv_obj_set_style_text_font(ui_OnOffCarLabel4, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn4 = lv_switch_create(ui_OnOffpanel3);
-    lv_obj_set_width(ui_OnOffAllCarbtn4, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn4, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn4, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn4, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn4, LV_ALIGN_CENTER);
+    ui_Car1Io2btn = lv_switch_create(ui_OnOffpanel3);
+    lv_obj_set_width(ui_Car1Io2btn, 58);
+    lv_obj_set_height(ui_Car1Io2btn, 28);
+    lv_obj_set_x(ui_Car1Io2btn, 22);
+    lv_obj_set_y(ui_Car1Io2btn, 0);
+    lv_obj_set_align(ui_Car1Io2btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel1 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel1, 134);
@@ -772,12 +772,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel1, "IO3");
     lv_obj_set_style_text_font(ui_OnOffCarLabel1, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn1 = lv_switch_create(ui_OnOffpanel1);
-    lv_obj_set_width(ui_OnOffAllCarbtn1, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn1, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn1, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn1, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn1, LV_ALIGN_CENTER);
+    ui_Car1Io3btn = lv_switch_create(ui_OnOffpanel1);
+    lv_obj_set_width(ui_Car1Io3btn, 58);
+    lv_obj_set_height(ui_Car1Io3btn, 28);
+    lv_obj_set_x(ui_Car1Io3btn, 22);
+    lv_obj_set_y(ui_Car1Io3btn, 0);
+    lv_obj_set_align(ui_Car1Io3btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel4 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel4, 134);
@@ -796,12 +796,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel5, "IO4");
     lv_obj_set_style_text_font(ui_OnOffCarLabel5, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn5 = lv_switch_create(ui_OnOffpanel4);
-    lv_obj_set_width(ui_OnOffAllCarbtn5, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn5, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn5, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn5, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn5, LV_ALIGN_CENTER);
+    ui_Car1Io4btn = lv_switch_create(ui_OnOffpanel4);
+    lv_obj_set_width(ui_Car1Io4btn, 58);
+    lv_obj_set_height(ui_Car1Io4btn, 28);
+    lv_obj_set_x(ui_Car1Io4btn, 22);
+    lv_obj_set_y(ui_Car1Io4btn, 0);
+    lv_obj_set_align(ui_Car1Io4btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel5 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel5, 134);
@@ -820,12 +820,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel6, "IO6");
     lv_obj_set_style_text_font(ui_OnOffCarLabel6, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn6 = lv_switch_create(ui_OnOffpanel5);
-    lv_obj_set_width(ui_OnOffAllCarbtn6, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn6, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn6, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn6, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn6, LV_ALIGN_CENTER);
+    ui_Car1Io6btn = lv_switch_create(ui_OnOffpanel5);
+    lv_obj_set_width(ui_Car1Io6btn, 58);
+    lv_obj_set_height(ui_Car1Io6btn, 28);
+    lv_obj_set_x(ui_Car1Io6btn, 22);
+    lv_obj_set_y(ui_Car1Io6btn, 0);
+    lv_obj_set_align(ui_Car1Io6btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel6 = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_OnOffpanel6, 134);
@@ -844,12 +844,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel7, "IO5");
     lv_obj_set_style_text_font(ui_OnOffCarLabel7, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn7 = lv_switch_create(ui_OnOffpanel6);
-    lv_obj_set_width(ui_OnOffAllCarbtn7, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn7, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn7, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn7, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn7, LV_ALIGN_CENTER);
+    ui_Car1Io5btn = lv_switch_create(ui_OnOffpanel6);
+    lv_obj_set_width(ui_Car1Io5btn, 58);
+    lv_obj_set_height(ui_Car1Io5btn, 28);
+    lv_obj_set_x(ui_Car1Io5btn, 22);
+    lv_obj_set_y(ui_Car1Io5btn, 0);
+    lv_obj_set_align(ui_Car1Io5btn, LV_ALIGN_CENTER);
 
     ui_Batterypanel = lv_obj_create(ui_Car1panel);
     lv_obj_set_width(ui_Batterypanel, 93);
@@ -907,14 +907,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_ModeCarLabel2, "MODE");
     lv_obj_set_style_text_font(ui_ModeCarLabel2, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_MotorMode2 = lv_dropdown_create(ui_Modepanel2);
-    lv_dropdown_set_options(ui_MotorMode2, "Mode 1\nMode 2\n");
-    lv_obj_set_width(ui_MotorMode2, 107);
-    lv_obj_set_height(ui_MotorMode2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_MotorMode2, 49);
-    lv_obj_set_y(ui_MotorMode2, 0);
-    lv_obj_set_align(ui_MotorMode2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_MotorMode2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_ModeCar2 = lv_dropdown_create(ui_Modepanel2);
+    lv_dropdown_set_options(ui_ModeCar2, "Mode 1\nMode 2\n");
+    lv_obj_set_width(ui_ModeCar2, 107);
+    lv_obj_set_height(ui_ModeCar2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeCar2, 49);
+    lv_obj_set_y(ui_ModeCar2, 0);
+    lv_obj_set_align(ui_ModeCar2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ModeCar2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel14 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel14, 228);
@@ -933,12 +933,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel16, "ON/OFF ");
     lv_obj_set_style_text_font(ui_OnOffCarLabel16, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn15 = lv_switch_create(ui_OnOffpanel14);
-    lv_obj_set_width(ui_OnOffAllCarbtn15, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn15, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn15, 52);
-    lv_obj_set_y(ui_OnOffAllCarbtn15, -1);
-    lv_obj_set_align(ui_OnOffAllCarbtn15, LV_ALIGN_CENTER);
+    ui_OnOffCar2btn = lv_switch_create(ui_OnOffpanel14);
+    lv_obj_set_width(ui_OnOffCar2btn, 58);
+    lv_obj_set_height(ui_OnOffCar2btn, 28);
+    lv_obj_set_x(ui_OnOffCar2btn, 52);
+    lv_obj_set_y(ui_OnOffCar2btn, -1);
+    lv_obj_set_align(ui_OnOffCar2btn, LV_ALIGN_CENTER);
 
     ui_Speedpanel2 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_Speedpanel2, 228);
@@ -957,14 +957,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel8, "SPEED");
     lv_obj_set_style_text_font(ui_OnOffCarLabel8, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Dropdown4 = lv_dropdown_create(ui_Speedpanel2);
-    lv_dropdown_set_options(ui_Dropdown4, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
-    lv_obj_set_width(ui_Dropdown4, 107);
-    lv_obj_set_height(ui_Dropdown4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Dropdown4, 49);
-    lv_obj_set_y(ui_Dropdown4, 0);
-    lv_obj_set_align(ui_Dropdown4, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Dropdown4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SpeedCar2 = lv_dropdown_create(ui_Speedpanel2);
+    lv_dropdown_set_options(ui_SpeedCar2, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
+    lv_obj_set_width(ui_SpeedCar2, 107);
+    lv_obj_set_height(ui_SpeedCar2, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SpeedCar2, 49);
+    lv_obj_set_y(ui_SpeedCar2, 0);
+    lv_obj_set_align(ui_SpeedCar2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SpeedCar2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel7 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel7, 134);
@@ -983,12 +983,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel9, "IO1");
     lv_obj_set_style_text_font(ui_OnOffCarLabel9, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn8 = lv_switch_create(ui_OnOffpanel7);
-    lv_obj_set_width(ui_OnOffAllCarbtn8, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn8, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn8, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn8, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn8, LV_ALIGN_CENTER);
+    ui_Car2Io1btn = lv_switch_create(ui_OnOffpanel7);
+    lv_obj_set_width(ui_Car2Io1btn, 58);
+    lv_obj_set_height(ui_Car2Io1btn, 28);
+    lv_obj_set_x(ui_Car2Io1btn, 22);
+    lv_obj_set_y(ui_Car2Io1btn, 0);
+    lv_obj_set_align(ui_Car2Io1btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel8 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel8, 134);
@@ -1007,12 +1007,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel10, "IO2");
     lv_obj_set_style_text_font(ui_OnOffCarLabel10, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn9 = lv_switch_create(ui_OnOffpanel8);
-    lv_obj_set_width(ui_OnOffAllCarbtn9, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn9, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn9, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn9, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn9, LV_ALIGN_CENTER);
+    ui_Car2Io2btn = lv_switch_create(ui_OnOffpanel8);
+    lv_obj_set_width(ui_Car2Io2btn, 58);
+    lv_obj_set_height(ui_Car2Io2btn, 28);
+    lv_obj_set_x(ui_Car2Io2btn, 22);
+    lv_obj_set_y(ui_Car2Io2btn, 0);
+    lv_obj_set_align(ui_Car2Io2btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel9 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel9, 134);
@@ -1031,12 +1031,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel11, "IO3");
     lv_obj_set_style_text_font(ui_OnOffCarLabel11, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn10 = lv_switch_create(ui_OnOffpanel9);
-    lv_obj_set_width(ui_OnOffAllCarbtn10, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn10, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn10, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn10, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn10, LV_ALIGN_CENTER);
+    ui_Car2Io3btn = lv_switch_create(ui_OnOffpanel9);
+    lv_obj_set_width(ui_Car2Io3btn, 58);
+    lv_obj_set_height(ui_Car2Io3btn, 28);
+    lv_obj_set_x(ui_Car2Io3btn, 22);
+    lv_obj_set_y(ui_Car2Io3btn, 0);
+    lv_obj_set_align(ui_Car2Io3btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel10 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel10, 134);
@@ -1055,12 +1055,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel12, "IO4");
     lv_obj_set_style_text_font(ui_OnOffCarLabel12, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn11 = lv_switch_create(ui_OnOffpanel10);
-    lv_obj_set_width(ui_OnOffAllCarbtn11, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn11, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn11, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn11, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn11, LV_ALIGN_CENTER);
+    ui_Car2Io4btn = lv_switch_create(ui_OnOffpanel10);
+    lv_obj_set_width(ui_Car2Io4btn, 58);
+    lv_obj_set_height(ui_Car2Io4btn, 28);
+    lv_obj_set_x(ui_Car2Io4btn, 22);
+    lv_obj_set_y(ui_Car2Io4btn, 0);
+    lv_obj_set_align(ui_Car2Io4btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel11 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel11, 134);
@@ -1079,12 +1079,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel13, "IO6");
     lv_obj_set_style_text_font(ui_OnOffCarLabel13, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn12 = lv_switch_create(ui_OnOffpanel11);
-    lv_obj_set_width(ui_OnOffAllCarbtn12, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn12, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn12, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn12, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn12, LV_ALIGN_CENTER);
+    ui_Car2Io6btn = lv_switch_create(ui_OnOffpanel11);
+    lv_obj_set_width(ui_Car2Io6btn, 58);
+    lv_obj_set_height(ui_Car2Io6btn, 28);
+    lv_obj_set_x(ui_Car2Io6btn, 22);
+    lv_obj_set_y(ui_Car2Io6btn, 0);
+    lv_obj_set_align(ui_Car2Io6btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel12 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_OnOffpanel12, 134);
@@ -1103,12 +1103,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel14, "IO5");
     lv_obj_set_style_text_font(ui_OnOffCarLabel14, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn13 = lv_switch_create(ui_OnOffpanel12);
-    lv_obj_set_width(ui_OnOffAllCarbtn13, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn13, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn13, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn13, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn13, LV_ALIGN_CENTER);
+    ui_Car2Io5btn = lv_switch_create(ui_OnOffpanel12);
+    lv_obj_set_width(ui_Car2Io5btn, 58);
+    lv_obj_set_height(ui_Car2Io5btn, 28);
+    lv_obj_set_x(ui_Car2Io5btn, 22);
+    lv_obj_set_y(ui_Car2Io5btn, 0);
+    lv_obj_set_align(ui_Car2Io5btn, LV_ALIGN_CENTER);
 
     ui_Batterypanel2 = lv_obj_create(ui_Car2panel);
     lv_obj_set_width(ui_Batterypanel2, 93);
@@ -1166,14 +1166,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_ModeCarLabel3, "MODE");
     lv_obj_set_style_text_font(ui_ModeCarLabel3, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_MotorMode3 = lv_dropdown_create(ui_Modepanel3);
-    lv_dropdown_set_options(ui_MotorMode3, "Mode 1\nMode 2\n");
-    lv_obj_set_width(ui_MotorMode3, 107);
-    lv_obj_set_height(ui_MotorMode3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_MotorMode3, 49);
-    lv_obj_set_y(ui_MotorMode3, 0);
-    lv_obj_set_align(ui_MotorMode3, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_MotorMode3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_ModeCar3 = lv_dropdown_create(ui_Modepanel3);
+    lv_dropdown_set_options(ui_ModeCar3, "Mode 1\nMode 2\n");
+    lv_obj_set_width(ui_ModeCar3, 107);
+    lv_obj_set_height(ui_ModeCar3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeCar3, 49);
+    lv_obj_set_y(ui_ModeCar3, 0);
+    lv_obj_set_align(ui_ModeCar3, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ModeCar3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel15 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel15, 228);
@@ -1192,12 +1192,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel17, "ON/OFF ");
     lv_obj_set_style_text_font(ui_OnOffCarLabel17, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn16 = lv_switch_create(ui_OnOffpanel15);
-    lv_obj_set_width(ui_OnOffAllCarbtn16, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn16, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn16, 52);
-    lv_obj_set_y(ui_OnOffAllCarbtn16, -1);
-    lv_obj_set_align(ui_OnOffAllCarbtn16, LV_ALIGN_CENTER);
+    ui_OnOffCar3btn = lv_switch_create(ui_OnOffpanel15);
+    lv_obj_set_width(ui_OnOffCar3btn, 58);
+    lv_obj_set_height(ui_OnOffCar3btn, 28);
+    lv_obj_set_x(ui_OnOffCar3btn, 52);
+    lv_obj_set_y(ui_OnOffCar3btn, -1);
+    lv_obj_set_align(ui_OnOffCar3btn, LV_ALIGN_CENTER);
 
     ui_Speedpanel3 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_Speedpanel3, 228);
@@ -1216,14 +1216,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel18, "SPEED");
     lv_obj_set_style_text_font(ui_OnOffCarLabel18, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Dropdown5 = lv_dropdown_create(ui_Speedpanel3);
-    lv_dropdown_set_options(ui_Dropdown5, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
-    lv_obj_set_width(ui_Dropdown5, 107);
-    lv_obj_set_height(ui_Dropdown5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Dropdown5, 49);
-    lv_obj_set_y(ui_Dropdown5, 0);
-    lv_obj_set_align(ui_Dropdown5, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Dropdown5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SpeedCar3 = lv_dropdown_create(ui_Speedpanel3);
+    lv_dropdown_set_options(ui_SpeedCar3, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
+    lv_obj_set_width(ui_SpeedCar3, 107);
+    lv_obj_set_height(ui_SpeedCar3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SpeedCar3, 49);
+    lv_obj_set_y(ui_SpeedCar3, 0);
+    lv_obj_set_align(ui_SpeedCar3, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SpeedCar3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel16 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel16, 134);
@@ -1242,12 +1242,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel19, "IO1");
     lv_obj_set_style_text_font(ui_OnOffCarLabel19, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn17 = lv_switch_create(ui_OnOffpanel16);
-    lv_obj_set_width(ui_OnOffAllCarbtn17, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn17, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn17, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn17, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn17, LV_ALIGN_CENTER);
+    ui_Car3Io1btn = lv_switch_create(ui_OnOffpanel16);
+    lv_obj_set_width(ui_Car3Io1btn, 58);
+    lv_obj_set_height(ui_Car3Io1btn, 28);
+    lv_obj_set_x(ui_Car3Io1btn, 22);
+    lv_obj_set_y(ui_Car3Io1btn, 0);
+    lv_obj_set_align(ui_Car3Io1btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel17 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel17, 134);
@@ -1266,12 +1266,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel20, "IO2");
     lv_obj_set_style_text_font(ui_OnOffCarLabel20, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn18 = lv_switch_create(ui_OnOffpanel17);
-    lv_obj_set_width(ui_OnOffAllCarbtn18, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn18, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn18, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn18, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn18, LV_ALIGN_CENTER);
+    ui_Car3Io2btn = lv_switch_create(ui_OnOffpanel17);
+    lv_obj_set_width(ui_Car3Io2btn, 58);
+    lv_obj_set_height(ui_Car3Io2btn, 28);
+    lv_obj_set_x(ui_Car3Io2btn, 22);
+    lv_obj_set_y(ui_Car3Io2btn, 0);
+    lv_obj_set_align(ui_Car3Io2btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel18 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel18, 134);
@@ -1290,12 +1290,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel21, "IO3");
     lv_obj_set_style_text_font(ui_OnOffCarLabel21, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn19 = lv_switch_create(ui_OnOffpanel18);
-    lv_obj_set_width(ui_OnOffAllCarbtn19, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn19, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn19, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn19, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn19, LV_ALIGN_CENTER);
+    ui_Car3Io3btn = lv_switch_create(ui_OnOffpanel18);
+    lv_obj_set_width(ui_Car3Io3btn, 58);
+    lv_obj_set_height(ui_Car3Io3btn, 28);
+    lv_obj_set_x(ui_Car3Io3btn, 22);
+    lv_obj_set_y(ui_Car3Io3btn, 0);
+    lv_obj_set_align(ui_Car3Io3btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel19 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel19, 134);
@@ -1314,12 +1314,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel22, "IO4");
     lv_obj_set_style_text_font(ui_OnOffCarLabel22, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn20 = lv_switch_create(ui_OnOffpanel19);
-    lv_obj_set_width(ui_OnOffAllCarbtn20, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn20, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn20, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn20, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn20, LV_ALIGN_CENTER);
+    ui_Car3Io4btn = lv_switch_create(ui_OnOffpanel19);
+    lv_obj_set_width(ui_Car3Io4btn, 58);
+    lv_obj_set_height(ui_Car3Io4btn, 28);
+    lv_obj_set_x(ui_Car3Io4btn, 22);
+    lv_obj_set_y(ui_Car3Io4btn, 0);
+    lv_obj_set_align(ui_Car3Io4btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel20 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel20, 134);
@@ -1338,12 +1338,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel23, "IO6");
     lv_obj_set_style_text_font(ui_OnOffCarLabel23, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn21 = lv_switch_create(ui_OnOffpanel20);
-    lv_obj_set_width(ui_OnOffAllCarbtn21, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn21, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn21, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn21, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn21, LV_ALIGN_CENTER);
+    ui_Car3Io6btn = lv_switch_create(ui_OnOffpanel20);
+    lv_obj_set_width(ui_Car3Io6btn, 58);
+    lv_obj_set_height(ui_Car3Io6btn, 28);
+    lv_obj_set_x(ui_Car3Io6btn, 22);
+    lv_obj_set_y(ui_Car3Io6btn, 0);
+    lv_obj_set_align(ui_Car3Io6btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel21 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_OnOffpanel21, 134);
@@ -1362,12 +1362,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel24, "IO5");
     lv_obj_set_style_text_font(ui_OnOffCarLabel24, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn22 = lv_switch_create(ui_OnOffpanel21);
-    lv_obj_set_width(ui_OnOffAllCarbtn22, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn22, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn22, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn22, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn22, LV_ALIGN_CENTER);
+    ui_Car3Io5btn = lv_switch_create(ui_OnOffpanel21);
+    lv_obj_set_width(ui_Car3Io5btn, 58);
+    lv_obj_set_height(ui_Car3Io5btn, 28);
+    lv_obj_set_x(ui_Car3Io5btn, 22);
+    lv_obj_set_y(ui_Car3Io5btn, 0);
+    lv_obj_set_align(ui_Car3Io5btn, LV_ALIGN_CENTER);
 
     ui_Batterypanel3 = lv_obj_create(ui_Car3panel);
     lv_obj_set_width(ui_Batterypanel3, 93);
@@ -1425,14 +1425,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_ModeCarLabel4, "MODE");
     lv_obj_set_style_text_font(ui_ModeCarLabel4, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_MotorMode4 = lv_dropdown_create(ui_Modepanel4);
-    lv_dropdown_set_options(ui_MotorMode4, "Mode 1\nMode 2\n");
-    lv_obj_set_width(ui_MotorMode4, 107);
-    lv_obj_set_height(ui_MotorMode4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_MotorMode4, 49);
-    lv_obj_set_y(ui_MotorMode4, 0);
-    lv_obj_set_align(ui_MotorMode4, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_MotorMode4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_ModeCar4 = lv_dropdown_create(ui_Modepanel4);
+    lv_dropdown_set_options(ui_ModeCar4, "Mode 1\nMode 2\n");
+    lv_obj_set_width(ui_ModeCar4, 107);
+    lv_obj_set_height(ui_ModeCar4, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeCar4, 49);
+    lv_obj_set_y(ui_ModeCar4, 0);
+    lv_obj_set_align(ui_ModeCar4, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ModeCar4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel22 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel22, 228);
@@ -1451,12 +1451,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel25, "ON/OFF ");
     lv_obj_set_style_text_font(ui_OnOffCarLabel25, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn23 = lv_switch_create(ui_OnOffpanel22);
-    lv_obj_set_width(ui_OnOffAllCarbtn23, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn23, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn23, 52);
-    lv_obj_set_y(ui_OnOffAllCarbtn23, -1);
-    lv_obj_set_align(ui_OnOffAllCarbtn23, LV_ALIGN_CENTER);
+    ui_OnOffCar4btn = lv_switch_create(ui_OnOffpanel22);
+    lv_obj_set_width(ui_OnOffCar4btn, 58);
+    lv_obj_set_height(ui_OnOffCar4btn, 28);
+    lv_obj_set_x(ui_OnOffCar4btn, 52);
+    lv_obj_set_y(ui_OnOffCar4btn, -1);
+    lv_obj_set_align(ui_OnOffCar4btn, LV_ALIGN_CENTER);
 
     ui_Speedpanel4 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_Speedpanel4, 228);
@@ -1475,14 +1475,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel26, "SPEED");
     lv_obj_set_style_text_font(ui_OnOffCarLabel26, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Dropdown6 = lv_dropdown_create(ui_Speedpanel4);
-    lv_dropdown_set_options(ui_Dropdown6, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
-    lv_obj_set_width(ui_Dropdown6, 107);
-    lv_obj_set_height(ui_Dropdown6, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Dropdown6, 49);
-    lv_obj_set_y(ui_Dropdown6, 0);
-    lv_obj_set_align(ui_Dropdown6, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Dropdown6, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SpeedCar4 = lv_dropdown_create(ui_Speedpanel4);
+    lv_dropdown_set_options(ui_SpeedCar4, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
+    lv_obj_set_width(ui_SpeedCar4, 107);
+    lv_obj_set_height(ui_SpeedCar4, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SpeedCar4, 49);
+    lv_obj_set_y(ui_SpeedCar4, 0);
+    lv_obj_set_align(ui_SpeedCar4, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SpeedCar4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel23 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel23, 134);
@@ -1501,12 +1501,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel27, "IO1");
     lv_obj_set_style_text_font(ui_OnOffCarLabel27, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn24 = lv_switch_create(ui_OnOffpanel23);
-    lv_obj_set_width(ui_OnOffAllCarbtn24, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn24, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn24, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn24, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn24, LV_ALIGN_CENTER);
+    ui_Car4Io1btn = lv_switch_create(ui_OnOffpanel23);
+    lv_obj_set_width(ui_Car4Io1btn, 58);
+    lv_obj_set_height(ui_Car4Io1btn, 28);
+    lv_obj_set_x(ui_Car4Io1btn, 22);
+    lv_obj_set_y(ui_Car4Io1btn, 0);
+    lv_obj_set_align(ui_Car4Io1btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel24 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel24, 134);
@@ -1525,12 +1525,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel28, "IO2");
     lv_obj_set_style_text_font(ui_OnOffCarLabel28, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn25 = lv_switch_create(ui_OnOffpanel24);
-    lv_obj_set_width(ui_OnOffAllCarbtn25, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn25, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn25, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn25, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn25, LV_ALIGN_CENTER);
+    ui_Car4Io2btn = lv_switch_create(ui_OnOffpanel24);
+    lv_obj_set_width(ui_Car4Io2btn, 58);
+    lv_obj_set_height(ui_Car4Io2btn, 28);
+    lv_obj_set_x(ui_Car4Io2btn, 22);
+    lv_obj_set_y(ui_Car4Io2btn, 0);
+    lv_obj_set_align(ui_Car4Io2btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel25 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel25, 134);
@@ -1549,12 +1549,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel29, "IO3");
     lv_obj_set_style_text_font(ui_OnOffCarLabel29, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn26 = lv_switch_create(ui_OnOffpanel25);
-    lv_obj_set_width(ui_OnOffAllCarbtn26, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn26, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn26, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn26, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn26, LV_ALIGN_CENTER);
+    ui_Car4Io3btn = lv_switch_create(ui_OnOffpanel25);
+    lv_obj_set_width(ui_Car4Io3btn, 58);
+    lv_obj_set_height(ui_Car4Io3btn, 28);
+    lv_obj_set_x(ui_Car4Io3btn, 22);
+    lv_obj_set_y(ui_Car4Io3btn, 0);
+    lv_obj_set_align(ui_Car4Io3btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel26 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel26, 134);
@@ -1573,12 +1573,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel30, "IO4");
     lv_obj_set_style_text_font(ui_OnOffCarLabel30, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn27 = lv_switch_create(ui_OnOffpanel26);
-    lv_obj_set_width(ui_OnOffAllCarbtn27, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn27, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn27, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn27, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn27, LV_ALIGN_CENTER);
+    ui_Car4Io4btn = lv_switch_create(ui_OnOffpanel26);
+    lv_obj_set_width(ui_Car4Io4btn, 58);
+    lv_obj_set_height(ui_Car4Io4btn, 28);
+    lv_obj_set_x(ui_Car4Io4btn, 22);
+    lv_obj_set_y(ui_Car4Io4btn, 0);
+    lv_obj_set_align(ui_Car4Io4btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel27 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel27, 134);
@@ -1597,12 +1597,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel31, "IO6");
     lv_obj_set_style_text_font(ui_OnOffCarLabel31, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn28 = lv_switch_create(ui_OnOffpanel27);
-    lv_obj_set_width(ui_OnOffAllCarbtn28, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn28, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn28, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn28, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn28, LV_ALIGN_CENTER);
+    ui_Car4Io6btn = lv_switch_create(ui_OnOffpanel27);
+    lv_obj_set_width(ui_Car4Io6btn, 58);
+    lv_obj_set_height(ui_Car4Io6btn, 28);
+    lv_obj_set_x(ui_Car4Io6btn, 22);
+    lv_obj_set_y(ui_Car4Io6btn, 0);
+    lv_obj_set_align(ui_Car4Io6btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel28 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_OnOffpanel28, 134);
@@ -1621,12 +1621,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel32, "IO5");
     lv_obj_set_style_text_font(ui_OnOffCarLabel32, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn29 = lv_switch_create(ui_OnOffpanel28);
-    lv_obj_set_width(ui_OnOffAllCarbtn29, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn29, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn29, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn29, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn29, LV_ALIGN_CENTER);
+    ui_Car4Io5btn = lv_switch_create(ui_OnOffpanel28);
+    lv_obj_set_width(ui_Car4Io5btn, 58);
+    lv_obj_set_height(ui_Car4Io5btn, 28);
+    lv_obj_set_x(ui_Car4Io5btn, 22);
+    lv_obj_set_y(ui_Car4Io5btn, 0);
+    lv_obj_set_align(ui_Car4Io5btn, LV_ALIGN_CENTER);
 
     ui_Batterypanel4 = lv_obj_create(ui_Car4panel);
     lv_obj_set_width(ui_Batterypanel4, 93);
@@ -1684,14 +1684,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_ModeCarLabel5, "MODE");
     lv_obj_set_style_text_font(ui_ModeCarLabel5, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_MotorMode5 = lv_dropdown_create(ui_Modepanel5);
-    lv_dropdown_set_options(ui_MotorMode5, "Mode 1\nMode 2\n");
-    lv_obj_set_width(ui_MotorMode5, 107);
-    lv_obj_set_height(ui_MotorMode5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_MotorMode5, 49);
-    lv_obj_set_y(ui_MotorMode5, 0);
-    lv_obj_set_align(ui_MotorMode5, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_MotorMode5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_ModeCar5 = lv_dropdown_create(ui_Modepanel5);
+    lv_dropdown_set_options(ui_ModeCar5, "Mode 1\nMode 2\n");
+    lv_obj_set_width(ui_ModeCar5, 107);
+    lv_obj_set_height(ui_ModeCar5, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeCar5, 49);
+    lv_obj_set_y(ui_ModeCar5, 0);
+    lv_obj_set_align(ui_ModeCar5, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ModeCar5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel29 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel29, 228);
@@ -1710,12 +1710,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel33, "ON/OFF ");
     lv_obj_set_style_text_font(ui_OnOffCarLabel33, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn30 = lv_switch_create(ui_OnOffpanel29);
-    lv_obj_set_width(ui_OnOffAllCarbtn30, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn30, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn30, 52);
-    lv_obj_set_y(ui_OnOffAllCarbtn30, -1);
-    lv_obj_set_align(ui_OnOffAllCarbtn30, LV_ALIGN_CENTER);
+    ui_OnOffCar5btn = lv_switch_create(ui_OnOffpanel29);
+    lv_obj_set_width(ui_OnOffCar5btn, 58);
+    lv_obj_set_height(ui_OnOffCar5btn, 28);
+    lv_obj_set_x(ui_OnOffCar5btn, 52);
+    lv_obj_set_y(ui_OnOffCar5btn, -1);
+    lv_obj_set_align(ui_OnOffCar5btn, LV_ALIGN_CENTER);
 
     ui_Speedpanel6 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_Speedpanel6, 228);
@@ -1734,14 +1734,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel35, "SPEED");
     lv_obj_set_style_text_font(ui_OnOffCarLabel35, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Dropdown7 = lv_dropdown_create(ui_Speedpanel6);
-    lv_dropdown_set_options(ui_Dropdown7, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
-    lv_obj_set_width(ui_Dropdown7, 107);
-    lv_obj_set_height(ui_Dropdown7, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Dropdown7, 49);
-    lv_obj_set_y(ui_Dropdown7, 0);
-    lv_obj_set_align(ui_Dropdown7, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Dropdown7, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SpeedCar5 = lv_dropdown_create(ui_Speedpanel6);
+    lv_dropdown_set_options(ui_SpeedCar5, "10%\n20%\n30%\n40%\n50%\n60%\n70%\n80%\n90%\n100%");
+    lv_obj_set_width(ui_SpeedCar5, 107);
+    lv_obj_set_height(ui_SpeedCar5, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SpeedCar5, 49);
+    lv_obj_set_y(ui_SpeedCar5, 0);
+    lv_obj_set_align(ui_SpeedCar5, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SpeedCar5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     ui_OnOffpanel30 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel30, 134);
@@ -1760,12 +1760,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel36, "IO1");
     lv_obj_set_style_text_font(ui_OnOffCarLabel36, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn31 = lv_switch_create(ui_OnOffpanel30);
-    lv_obj_set_width(ui_OnOffAllCarbtn31, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn31, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn31, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn31, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn31, LV_ALIGN_CENTER);
+    ui_Car5Io1btn = lv_switch_create(ui_OnOffpanel30);
+    lv_obj_set_width(ui_Car5Io1btn, 58);
+    lv_obj_set_height(ui_Car5Io1btn, 28);
+    lv_obj_set_x(ui_Car5Io1btn, 22);
+    lv_obj_set_y(ui_Car5Io1btn, 0);
+    lv_obj_set_align(ui_Car5Io1btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel31 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel31, 134);
@@ -1784,12 +1784,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel37, "IO2");
     lv_obj_set_style_text_font(ui_OnOffCarLabel37, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn32 = lv_switch_create(ui_OnOffpanel31);
-    lv_obj_set_width(ui_OnOffAllCarbtn32, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn32, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn32, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn32, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn32, LV_ALIGN_CENTER);
+    ui_Car5Io2btn = lv_switch_create(ui_OnOffpanel31);
+    lv_obj_set_width(ui_Car5Io2btn, 58);
+    lv_obj_set_height(ui_Car5Io2btn, 28);
+    lv_obj_set_x(ui_Car5Io2btn, 22);
+    lv_obj_set_y(ui_Car5Io2btn, 0);
+    lv_obj_set_align(ui_Car5Io2btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel32 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel32, 134);
@@ -1808,12 +1808,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel38, "IO3");
     lv_obj_set_style_text_font(ui_OnOffCarLabel38, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn33 = lv_switch_create(ui_OnOffpanel32);
-    lv_obj_set_width(ui_OnOffAllCarbtn33, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn33, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn33, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn33, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn33, LV_ALIGN_CENTER);
+    ui_Car5Io3btn = lv_switch_create(ui_OnOffpanel32);
+    lv_obj_set_width(ui_Car5Io3btn, 58);
+    lv_obj_set_height(ui_Car5Io3btn, 28);
+    lv_obj_set_x(ui_Car5Io3btn, 22);
+    lv_obj_set_y(ui_Car5Io3btn, 0);
+    lv_obj_set_align(ui_Car5Io3btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel33 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel33, 134);
@@ -1832,12 +1832,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel39, "IO4");
     lv_obj_set_style_text_font(ui_OnOffCarLabel39, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn34 = lv_switch_create(ui_OnOffpanel33);
-    lv_obj_set_width(ui_OnOffAllCarbtn34, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn34, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn34, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn34, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn34, LV_ALIGN_CENTER);
+    ui_Car5Io4btn = lv_switch_create(ui_OnOffpanel33);
+    lv_obj_set_width(ui_Car5Io4btn, 58);
+    lv_obj_set_height(ui_Car5Io4btn, 28);
+    lv_obj_set_x(ui_Car5Io4btn, 22);
+    lv_obj_set_y(ui_Car5Io4btn, 0);
+    lv_obj_set_align(ui_Car5Io4btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel34 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel34, 134);
@@ -1856,12 +1856,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel40, "IO6");
     lv_obj_set_style_text_font(ui_OnOffCarLabel40, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn35 = lv_switch_create(ui_OnOffpanel34);
-    lv_obj_set_width(ui_OnOffAllCarbtn35, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn35, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn35, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn35, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn35, LV_ALIGN_CENTER);
+    ui_Car5Io6btn = lv_switch_create(ui_OnOffpanel34);
+    lv_obj_set_width(ui_Car5Io6btn, 58);
+    lv_obj_set_height(ui_Car5Io6btn, 28);
+    lv_obj_set_x(ui_Car5Io6btn, 22);
+    lv_obj_set_y(ui_Car5Io6btn, 0);
+    lv_obj_set_align(ui_Car5Io6btn, LV_ALIGN_CENTER);
 
     ui_OnOffpanel35 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_OnOffpanel35, 134);
@@ -1880,12 +1880,12 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffCarLabel41, "IO5");
     lv_obj_set_style_text_font(ui_OnOffCarLabel41, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_OnOffAllCarbtn36 = lv_switch_create(ui_OnOffpanel35);
-    lv_obj_set_width(ui_OnOffAllCarbtn36, 58);
-    lv_obj_set_height(ui_OnOffAllCarbtn36, 28);
-    lv_obj_set_x(ui_OnOffAllCarbtn36, 22);
-    lv_obj_set_y(ui_OnOffAllCarbtn36, 0);
-    lv_obj_set_align(ui_OnOffAllCarbtn36, LV_ALIGN_CENTER);
+    ui_Car5Io5btn = lv_switch_create(ui_OnOffpanel35);
+    lv_obj_set_width(ui_Car5Io5btn, 58);
+    lv_obj_set_height(ui_Car5Io5btn, 28);
+    lv_obj_set_x(ui_Car5Io5btn, 22);
+    lv_obj_set_y(ui_Car5Io5btn, 0);
+    lv_obj_set_align(ui_Car5Io5btn, LV_ALIGN_CENTER);
 
     ui_Batterypanel5 = lv_obj_create(ui_Car5panel);
     lv_obj_set_width(ui_Batterypanel5, 93);
@@ -1966,51 +1966,51 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_OnOffAllCarlabel, "ON/OFF\nALL CAR");
     lv_obj_set_style_text_font(ui_OnOffAllCarlabel, &lv_font_montserrat_16, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_MotorMode, ui_event_MotorMode, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn3, ui_event_OnOffAllCarbtn3, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Dropdown2, ui_event_Dropdown2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn2, ui_event_OnOffAllCarbtn2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn4, ui_event_OnOffAllCarbtn4, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn1, ui_event_OnOffAllCarbtn1, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn5, ui_event_OnOffAllCarbtn5, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn6, ui_event_OnOffAllCarbtn6, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn7, ui_event_OnOffAllCarbtn7, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_MotorMode2, ui_event_MotorMode2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn15, ui_event_OnOffAllCarbtn15, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Dropdown4, ui_event_Dropdown4, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn8, ui_event_OnOffAllCarbtn8, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn9, ui_event_OnOffAllCarbtn9, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn10, ui_event_OnOffAllCarbtn10, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn11, ui_event_OnOffAllCarbtn11, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn12, ui_event_OnOffAllCarbtn12, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn13, ui_event_OnOffAllCarbtn13, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_MotorMode3, ui_event_MotorMode3, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn16, ui_event_OnOffAllCarbtn16, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Dropdown5, ui_event_Dropdown5, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn17, ui_event_OnOffAllCarbtn17, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn18, ui_event_OnOffAllCarbtn18, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn19, ui_event_OnOffAllCarbtn19, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn20, ui_event_OnOffAllCarbtn20, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn21, ui_event_OnOffAllCarbtn21, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn22, ui_event_OnOffAllCarbtn22, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_MotorMode4, ui_event_MotorMode4, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn23, ui_event_OnOffAllCarbtn23, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Dropdown6, ui_event_Dropdown6, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn24, ui_event_OnOffAllCarbtn24, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn25, ui_event_OnOffAllCarbtn25, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn26, ui_event_OnOffAllCarbtn26, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn27, ui_event_OnOffAllCarbtn27, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn28, ui_event_OnOffAllCarbtn28, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn29, ui_event_OnOffAllCarbtn29, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_MotorMode5, ui_event_MotorMode5, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn30, ui_event_OnOffAllCarbtn30, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Dropdown7, ui_event_Dropdown7, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn31, ui_event_OnOffAllCarbtn31, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn32, ui_event_OnOffAllCarbtn32, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn33, ui_event_OnOffAllCarbtn33, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn34, ui_event_OnOffAllCarbtn34, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn35, ui_event_OnOffAllCarbtn35, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_OnOffAllCarbtn36, ui_event_OnOffAllCarbtn36, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ModeCar1, ui_event_ModeCar1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OnOffCar1btn, ui_event_OnOffCar1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SpeedCar1, ui_event_SpeedCar1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io1btn, ui_event_Car1Io1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io2btn, ui_event_Car1Io2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io3btn, ui_event_Car1Io3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io4btn, ui_event_Car1Io4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io6btn, ui_event_Car1Io6btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car1Io5btn, ui_event_Car1Io5btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ModeCar2, ui_event_ModeCar2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OnOffCar2btn, ui_event_OnOffCar2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SpeedCar2, ui_event_SpeedCar2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io1btn, ui_event_Car2Io1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io2btn, ui_event_Car2Io2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io3btn, ui_event_Car2Io3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io4btn, ui_event_Car2Io4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io6btn, ui_event_Car2Io6btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car2Io5btn, ui_event_Car2Io5btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ModeCar3, ui_event_ModeCar3, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OnOffCar3btn, ui_event_OnOffCar3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SpeedCar3, ui_event_SpeedCar3, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io1btn, ui_event_Car3Io1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io2btn, ui_event_Car3Io2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io3btn, ui_event_Car3Io3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io4btn, ui_event_Car3Io4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io6btn, ui_event_Car3Io6btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car3Io5btn, ui_event_Car3Io5btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ModeCar4, ui_event_ModeCar4, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OnOffCar4btn, ui_event_OnOffCar4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SpeedCar4, ui_event_SpeedCar4, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io1btn, ui_event_Car4Io1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io2btn, ui_event_Car4Io2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io3btn, ui_event_Car4Io3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io4btn, ui_event_Car4Io4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io6btn, ui_event_Car4Io6btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car4Io5btn, ui_event_Car4Io5btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ModeCar5, ui_event_ModeCar5, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OnOffCar5btn, ui_event_OnOffCar5btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SpeedCar5, ui_event_SpeedCar5, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io1btn, ui_event_Car5Io1btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io2btn, ui_event_Car5Io2btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io3btn, ui_event_Car5Io3btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io4btn, ui_event_Car5Io4btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io6btn, ui_event_Car5Io6btn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Car5Io5btn, ui_event_Car5Io5btn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SpeedAllCardropdown, ui_event_SpeedAllCardropdown, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OnOffAllCarbtn, ui_event_OnOffAllCarbtn, LV_EVENT_ALL, NULL);
 
@@ -2028,31 +2028,31 @@ void ui_Screen1_screen_destroy(void)
     ui_Car1panel = NULL;
     ui_Modepanel = NULL;
     ui_ModeCarLabel = NULL;
-    ui_MotorMode = NULL;
+    ui_ModeCar1 = NULL;
     ui_OnOffpanel = NULL;
     ui_OnOffCarLabel = NULL;
-    ui_OnOffAllCarbtn3 = NULL;
+    ui_OnOffCar1btn = NULL;
     ui_Speedpanel = NULL;
     ui_OnOffCarLabel3 = NULL;
-    ui_Dropdown2 = NULL;
+    ui_SpeedCar1 = NULL;
     ui_OnOffpanel2 = NULL;
     ui_OnOffCarLabel2 = NULL;
-    ui_OnOffAllCarbtn2 = NULL;
+    ui_Car1Io1btn = NULL;
     ui_OnOffpanel3 = NULL;
     ui_OnOffCarLabel4 = NULL;
-    ui_OnOffAllCarbtn4 = NULL;
+    ui_Car1Io2btn = NULL;
     ui_OnOffpanel1 = NULL;
     ui_OnOffCarLabel1 = NULL;
-    ui_OnOffAllCarbtn1 = NULL;
+    ui_Car1Io3btn = NULL;
     ui_OnOffpanel4 = NULL;
     ui_OnOffCarLabel5 = NULL;
-    ui_OnOffAllCarbtn5 = NULL;
+    ui_Car1Io4btn = NULL;
     ui_OnOffpanel5 = NULL;
     ui_OnOffCarLabel6 = NULL;
-    ui_OnOffAllCarbtn6 = NULL;
+    ui_Car1Io6btn = NULL;
     ui_OnOffpanel6 = NULL;
     ui_OnOffCarLabel7 = NULL;
-    ui_OnOffAllCarbtn7 = NULL;
+    ui_Car1Io5btn = NULL;
     ui_Batterypanel = NULL;
     ui_Label2 = NULL;
     ui_Car1Batlabel = NULL;
@@ -2060,31 +2060,31 @@ void ui_Screen1_screen_destroy(void)
     ui_Car2panel = NULL;
     ui_Modepanel2 = NULL;
     ui_ModeCarLabel2 = NULL;
-    ui_MotorMode2 = NULL;
+    ui_ModeCar2 = NULL;
     ui_OnOffpanel14 = NULL;
     ui_OnOffCarLabel16 = NULL;
-    ui_OnOffAllCarbtn15 = NULL;
+    ui_OnOffCar2btn = NULL;
     ui_Speedpanel2 = NULL;
     ui_OnOffCarLabel8 = NULL;
-    ui_Dropdown4 = NULL;
+    ui_SpeedCar2 = NULL;
     ui_OnOffpanel7 = NULL;
     ui_OnOffCarLabel9 = NULL;
-    ui_OnOffAllCarbtn8 = NULL;
+    ui_Car2Io1btn = NULL;
     ui_OnOffpanel8 = NULL;
     ui_OnOffCarLabel10 = NULL;
-    ui_OnOffAllCarbtn9 = NULL;
+    ui_Car2Io2btn = NULL;
     ui_OnOffpanel9 = NULL;
     ui_OnOffCarLabel11 = NULL;
-    ui_OnOffAllCarbtn10 = NULL;
+    ui_Car2Io3btn = NULL;
     ui_OnOffpanel10 = NULL;
     ui_OnOffCarLabel12 = NULL;
-    ui_OnOffAllCarbtn11 = NULL;
+    ui_Car2Io4btn = NULL;
     ui_OnOffpanel11 = NULL;
     ui_OnOffCarLabel13 = NULL;
-    ui_OnOffAllCarbtn12 = NULL;
+    ui_Car2Io6btn = NULL;
     ui_OnOffpanel12 = NULL;
     ui_OnOffCarLabel14 = NULL;
-    ui_OnOffAllCarbtn13 = NULL;
+    ui_Car2Io5btn = NULL;
     ui_Batterypanel2 = NULL;
     ui_Label5 = NULL;
     ui_Car2Batlabel = NULL;
@@ -2092,31 +2092,31 @@ void ui_Screen1_screen_destroy(void)
     ui_Car3panel = NULL;
     ui_Modepanel3 = NULL;
     ui_ModeCarLabel3 = NULL;
-    ui_MotorMode3 = NULL;
+    ui_ModeCar3 = NULL;
     ui_OnOffpanel15 = NULL;
     ui_OnOffCarLabel17 = NULL;
-    ui_OnOffAllCarbtn16 = NULL;
+    ui_OnOffCar3btn = NULL;
     ui_Speedpanel3 = NULL;
     ui_OnOffCarLabel18 = NULL;
-    ui_Dropdown5 = NULL;
+    ui_SpeedCar3 = NULL;
     ui_OnOffpanel16 = NULL;
     ui_OnOffCarLabel19 = NULL;
-    ui_OnOffAllCarbtn17 = NULL;
+    ui_Car3Io1btn = NULL;
     ui_OnOffpanel17 = NULL;
     ui_OnOffCarLabel20 = NULL;
-    ui_OnOffAllCarbtn18 = NULL;
+    ui_Car3Io2btn = NULL;
     ui_OnOffpanel18 = NULL;
     ui_OnOffCarLabel21 = NULL;
-    ui_OnOffAllCarbtn19 = NULL;
+    ui_Car3Io3btn = NULL;
     ui_OnOffpanel19 = NULL;
     ui_OnOffCarLabel22 = NULL;
-    ui_OnOffAllCarbtn20 = NULL;
+    ui_Car3Io4btn = NULL;
     ui_OnOffpanel20 = NULL;
     ui_OnOffCarLabel23 = NULL;
-    ui_OnOffAllCarbtn21 = NULL;
+    ui_Car3Io6btn = NULL;
     ui_OnOffpanel21 = NULL;
     ui_OnOffCarLabel24 = NULL;
-    ui_OnOffAllCarbtn22 = NULL;
+    ui_Car3Io5btn = NULL;
     ui_Batterypanel3 = NULL;
     ui_Label6 = NULL;
     ui_Car3Batlabel = NULL;
@@ -2124,31 +2124,31 @@ void ui_Screen1_screen_destroy(void)
     ui_Car4panel = NULL;
     ui_Modepanel4 = NULL;
     ui_ModeCarLabel4 = NULL;
-    ui_MotorMode4 = NULL;
+    ui_ModeCar4 = NULL;
     ui_OnOffpanel22 = NULL;
     ui_OnOffCarLabel25 = NULL;
-    ui_OnOffAllCarbtn23 = NULL;
+    ui_OnOffCar4btn = NULL;
     ui_Speedpanel4 = NULL;
     ui_OnOffCarLabel26 = NULL;
-    ui_Dropdown6 = NULL;
+    ui_SpeedCar4 = NULL;
     ui_OnOffpanel23 = NULL;
     ui_OnOffCarLabel27 = NULL;
-    ui_OnOffAllCarbtn24 = NULL;
+    ui_Car4Io1btn = NULL;
     ui_OnOffpanel24 = NULL;
     ui_OnOffCarLabel28 = NULL;
-    ui_OnOffAllCarbtn25 = NULL;
+    ui_Car4Io2btn = NULL;
     ui_OnOffpanel25 = NULL;
     ui_OnOffCarLabel29 = NULL;
-    ui_OnOffAllCarbtn26 = NULL;
+    ui_Car4Io3btn = NULL;
     ui_OnOffpanel26 = NULL;
     ui_OnOffCarLabel30 = NULL;
-    ui_OnOffAllCarbtn27 = NULL;
+    ui_Car4Io4btn = NULL;
     ui_OnOffpanel27 = NULL;
     ui_OnOffCarLabel31 = NULL;
-    ui_OnOffAllCarbtn28 = NULL;
+    ui_Car4Io6btn = NULL;
     ui_OnOffpanel28 = NULL;
     ui_OnOffCarLabel32 = NULL;
-    ui_OnOffAllCarbtn29 = NULL;
+    ui_Car4Io5btn = NULL;
     ui_Batterypanel4 = NULL;
     ui_Label8 = NULL;
     ui_Car4Batlabel = NULL;
@@ -2156,31 +2156,31 @@ void ui_Screen1_screen_destroy(void)
     ui_Car5panel = NULL;
     ui_Modepanel5 = NULL;
     ui_ModeCarLabel5 = NULL;
-    ui_MotorMode5 = NULL;
+    ui_ModeCar5 = NULL;
     ui_OnOffpanel29 = NULL;
     ui_OnOffCarLabel33 = NULL;
-    ui_OnOffAllCarbtn30 = NULL;
+    ui_OnOffCar5btn = NULL;
     ui_Speedpanel6 = NULL;
     ui_OnOffCarLabel35 = NULL;
-    ui_Dropdown7 = NULL;
+    ui_SpeedCar5 = NULL;
     ui_OnOffpanel30 = NULL;
     ui_OnOffCarLabel36 = NULL;
-    ui_OnOffAllCarbtn31 = NULL;
+    ui_Car5Io1btn = NULL;
     ui_OnOffpanel31 = NULL;
     ui_OnOffCarLabel37 = NULL;
-    ui_OnOffAllCarbtn32 = NULL;
+    ui_Car5Io2btn = NULL;
     ui_OnOffpanel32 = NULL;
     ui_OnOffCarLabel38 = NULL;
-    ui_OnOffAllCarbtn33 = NULL;
+    ui_Car5Io3btn = NULL;
     ui_OnOffpanel33 = NULL;
     ui_OnOffCarLabel39 = NULL;
-    ui_OnOffAllCarbtn34 = NULL;
+    ui_Car5Io4btn = NULL;
     ui_OnOffpanel34 = NULL;
     ui_OnOffCarLabel40 = NULL;
-    ui_OnOffAllCarbtn35 = NULL;
+    ui_Car5Io6btn = NULL;
     ui_OnOffpanel35 = NULL;
     ui_OnOffCarLabel41 = NULL;
-    ui_OnOffAllCarbtn36 = NULL;
+    ui_Car5Io5btn = NULL;
     ui_Batterypanel5 = NULL;
     ui_Label10 = NULL;
     ui_Car5Batlabel = NULL;
